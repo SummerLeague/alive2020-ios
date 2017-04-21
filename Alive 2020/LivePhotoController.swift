@@ -10,8 +10,10 @@ import UIKit
 
 class LivePhotoController: UIViewController {
     
-    var selectedIndexPaths = Set<IndexPath>()
-   
+    fileprivate var selectedIndexPaths = Set<IndexPath>()
+    
+    var onSelected: (([IndexPath]) -> ())? = nil
+    
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing = 1.0
