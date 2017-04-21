@@ -9,6 +9,8 @@
 import UIKit
 
 class LivePhotoController: UIViewController {
+    
+    var selectedIndexPaths = Set<IndexPath>()
    
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -51,5 +53,27 @@ extension LivePhotoController: UICollectionViewDelegateFlowLayout {
         let width = (collectionView.bounds.width - margins) / items
         
         return CGSize(width: width, height: width)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if let livePhotoCell = cell as? LivePhotoCell {
+            livePhotoCell.isSelectionVisible = selectedIndexPaths.contains(indexPath)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedIndexPaths.insert(indexPath)
+        
+        if let cell = collectionView.cellForItem(at: indexPath) as? LivePhotoCell {
+            cell.isSelectionVisible = true
+        }
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        selectedIndexPaths.remove(indexPath)
+        
+        if let cell = collectionView.cellForItem(at: indexPath) as? LivePhotoCell {
+            cell.isSelectionVisible = false
+        }
     }
 }
