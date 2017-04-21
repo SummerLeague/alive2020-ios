@@ -1,0 +1,550 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D81460471EA9B18E00BA9D6C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81460461EA9B18E00BA9D6C /* AppDelegate.swift */; };
+		D814604E1EA9B18E00BA9D6C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D814604D1EA9B18E00BA9D6C /* Assets.xcassets */; };
+		D81460511EA9B18E00BA9D6C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D814604F1EA9B18E00BA9D6C /* LaunchScreen.storyboard */; };
+		D814605C1EA9B18E00BA9D6C /* Alive_2020Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D814605B1EA9B18E00BA9D6C /* Alive_2020Tests.swift */; };
+		D81460671EA9B18E00BA9D6C /* Alive_2020UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81460661EA9B18E00BA9D6C /* Alive_2020UITests.swift */; };
+		D81460751EA9B44300BA9D6C /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81460741EA9B44300BA9D6C /* AppCoordinator.swift */; };
+		D81460781EA9B4ED00BA9D6C /* LivePhotoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81460771EA9B4ED00BA9D6C /* LivePhotoController.swift */; };
+		D814607A1EA9B66500BA9D6C /* LivePhotoDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81460791EA9B66500BA9D6C /* LivePhotoDataSource.swift */; };
+		D814607C1EA9B66D00BA9D6C /* LivePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D814607B1EA9B66D00BA9D6C /* LivePhotoCell.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D81460581EA9B18E00BA9D6C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D814603B1EA9B18E00BA9D6C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D81460421EA9B18E00BA9D6C;
+			remoteInfo = "Alive 2020";
+		};
+		D81460631EA9B18E00BA9D6C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D814603B1EA9B18E00BA9D6C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D81460421EA9B18E00BA9D6C;
+			remoteInfo = "Alive 2020";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		D81460431EA9B18E00BA9D6C /* Alive 2020.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Alive 2020.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D81460461EA9B18E00BA9D6C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		D814604D1EA9B18E00BA9D6C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D81460501EA9B18E00BA9D6C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D81460521EA9B18E00BA9D6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D81460571EA9B18E00BA9D6C /* Alive 2020Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Alive 2020Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D814605B1EA9B18E00BA9D6C /* Alive_2020Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alive_2020Tests.swift; sourceTree = "<group>"; };
+		D814605D1EA9B18E00BA9D6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D81460621EA9B18E00BA9D6C /* Alive 2020UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Alive 2020UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D81460661EA9B18E00BA9D6C /* Alive_2020UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alive_2020UITests.swift; sourceTree = "<group>"; };
+		D81460681EA9B18E00BA9D6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D81460741EA9B44300BA9D6C /* AppCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		D81460771EA9B4ED00BA9D6C /* LivePhotoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LivePhotoController.swift; sourceTree = "<group>"; };
+		D81460791EA9B66500BA9D6C /* LivePhotoDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LivePhotoDataSource.swift; sourceTree = "<group>"; };
+		D814607B1EA9B66D00BA9D6C /* LivePhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LivePhotoCell.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D81460401EA9B18E00BA9D6C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D81460541EA9B18E00BA9D6C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D814605F1EA9B18E00BA9D6C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D814603A1EA9B18E00BA9D6C = {
+			isa = PBXGroup;
+			children = (
+				D81460451EA9B18E00BA9D6C /* Alive 2020 */,
+				D814605A1EA9B18E00BA9D6C /* Alive 2020Tests */,
+				D81460651EA9B18E00BA9D6C /* Alive 2020UITests */,
+				D81460441EA9B18E00BA9D6C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D81460441EA9B18E00BA9D6C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D81460431EA9B18E00BA9D6C /* Alive 2020.app */,
+				D81460571EA9B18E00BA9D6C /* Alive 2020Tests.xctest */,
+				D81460621EA9B18E00BA9D6C /* Alive 2020UITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D81460451EA9B18E00BA9D6C /* Alive 2020 */ = {
+			isa = PBXGroup;
+			children = (
+				D81460761EA9B4D100BA9D6C /* Sources */,
+				D814604D1EA9B18E00BA9D6C /* Assets.xcassets */,
+				D814604F1EA9B18E00BA9D6C /* LaunchScreen.storyboard */,
+				D81460521EA9B18E00BA9D6C /* Info.plist */,
+			);
+			path = "Alive 2020";
+			sourceTree = "<group>";
+		};
+		D814605A1EA9B18E00BA9D6C /* Alive 2020Tests */ = {
+			isa = PBXGroup;
+			children = (
+				D814605B1EA9B18E00BA9D6C /* Alive_2020Tests.swift */,
+				D814605D1EA9B18E00BA9D6C /* Info.plist */,
+			);
+			path = "Alive 2020Tests";
+			sourceTree = "<group>";
+		};
+		D81460651EA9B18E00BA9D6C /* Alive 2020UITests */ = {
+			isa = PBXGroup;
+			children = (
+				D81460661EA9B18E00BA9D6C /* Alive_2020UITests.swift */,
+				D81460681EA9B18E00BA9D6C /* Info.plist */,
+			);
+			path = "Alive 2020UITests";
+			sourceTree = "<group>";
+		};
+		D81460761EA9B4D100BA9D6C /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				D81460461EA9B18E00BA9D6C /* AppDelegate.swift */,
+				D81460741EA9B44300BA9D6C /* AppCoordinator.swift */,
+				D814607B1EA9B66D00BA9D6C /* LivePhotoCell.swift */,
+				D81460771EA9B4ED00BA9D6C /* LivePhotoController.swift */,
+				D81460791EA9B66500BA9D6C /* LivePhotoDataSource.swift */,
+			);
+			name = Sources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D81460421EA9B18E00BA9D6C /* Alive 2020 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D814606B1EA9B18E00BA9D6C /* Build configuration list for PBXNativeTarget "Alive 2020" */;
+			buildPhases = (
+				D814603F1EA9B18E00BA9D6C /* Sources */,
+				D81460401EA9B18E00BA9D6C /* Frameworks */,
+				D81460411EA9B18E00BA9D6C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Alive 2020";
+			productName = "Alive 2020";
+			productReference = D81460431EA9B18E00BA9D6C /* Alive 2020.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D81460561EA9B18E00BA9D6C /* Alive 2020Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D814606E1EA9B18E00BA9D6C /* Build configuration list for PBXNativeTarget "Alive 2020Tests" */;
+			buildPhases = (
+				D81460531EA9B18E00BA9D6C /* Sources */,
+				D81460541EA9B18E00BA9D6C /* Frameworks */,
+				D81460551EA9B18E00BA9D6C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D81460591EA9B18E00BA9D6C /* PBXTargetDependency */,
+			);
+			name = "Alive 2020Tests";
+			productName = "Alive 2020Tests";
+			productReference = D81460571EA9B18E00BA9D6C /* Alive 2020Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		D81460611EA9B18E00BA9D6C /* Alive 2020UITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D81460711EA9B18E00BA9D6C /* Build configuration list for PBXNativeTarget "Alive 2020UITests" */;
+			buildPhases = (
+				D814605E1EA9B18E00BA9D6C /* Sources */,
+				D814605F1EA9B18E00BA9D6C /* Frameworks */,
+				D81460601EA9B18E00BA9D6C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D81460641EA9B18E00BA9D6C /* PBXTargetDependency */,
+			);
+			name = "Alive 2020UITests";
+			productName = "Alive 2020UITests";
+			productReference = D81460621EA9B18E00BA9D6C /* Alive 2020UITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D814603B1EA9B18E00BA9D6C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = "Summer League";
+				TargetAttributes = {
+					D81460421EA9B18E00BA9D6C = {
+						CreatedOnToolsVersion = 8.3;
+						DevelopmentTeam = L7KVF73XT4;
+						ProvisioningStyle = Automatic;
+					};
+					D81460561EA9B18E00BA9D6C = {
+						CreatedOnToolsVersion = 8.3;
+						DevelopmentTeam = L7KVF73XT4;
+						ProvisioningStyle = Automatic;
+						TestTargetID = D81460421EA9B18E00BA9D6C;
+					};
+					D81460611EA9B18E00BA9D6C = {
+						CreatedOnToolsVersion = 8.3;
+						DevelopmentTeam = L7KVF73XT4;
+						ProvisioningStyle = Automatic;
+						TestTargetID = D81460421EA9B18E00BA9D6C;
+					};
+				};
+			};
+			buildConfigurationList = D814603E1EA9B18E00BA9D6C /* Build configuration list for PBXProject "Alive 2020" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D814603A1EA9B18E00BA9D6C;
+			productRefGroup = D81460441EA9B18E00BA9D6C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D81460421EA9B18E00BA9D6C /* Alive 2020 */,
+				D81460561EA9B18E00BA9D6C /* Alive 2020Tests */,
+				D81460611EA9B18E00BA9D6C /* Alive 2020UITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D81460411EA9B18E00BA9D6C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D81460511EA9B18E00BA9D6C /* LaunchScreen.storyboard in Resources */,
+				D814604E1EA9B18E00BA9D6C /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D81460551EA9B18E00BA9D6C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D81460601EA9B18E00BA9D6C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D814603F1EA9B18E00BA9D6C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D81460751EA9B44300BA9D6C /* AppCoordinator.swift in Sources */,
+				D814607A1EA9B66500BA9D6C /* LivePhotoDataSource.swift in Sources */,
+				D814607C1EA9B66D00BA9D6C /* LivePhotoCell.swift in Sources */,
+				D81460781EA9B4ED00BA9D6C /* LivePhotoController.swift in Sources */,
+				D81460471EA9B18E00BA9D6C /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D81460531EA9B18E00BA9D6C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D814605C1EA9B18E00BA9D6C /* Alive_2020Tests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D814605E1EA9B18E00BA9D6C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D81460671EA9B18E00BA9D6C /* Alive_2020UITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D81460591EA9B18E00BA9D6C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D81460421EA9B18E00BA9D6C /* Alive 2020 */;
+			targetProxy = D81460581EA9B18E00BA9D6C /* PBXContainerItemProxy */;
+		};
+		D81460641EA9B18E00BA9D6C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D81460421EA9B18E00BA9D6C /* Alive 2020 */;
+			targetProxy = D81460631EA9B18E00BA9D6C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		D814604F1EA9B18E00BA9D6C /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D81460501EA9B18E00BA9D6C /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D81460691EA9B18E00BA9D6C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D814606A1EA9B18E00BA9D6C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D814606C1EA9B18E00BA9D6C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = L7KVF73XT4;
+				INFOPLIST_FILE = "Alive 2020/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.summerleague.Alive-2020";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		D814606D1EA9B18E00BA9D6C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = L7KVF73XT4;
+				INFOPLIST_FILE = "Alive 2020/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.summerleague.Alive-2020";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		D814606F1EA9B18E00BA9D6C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = L7KVF73XT4;
+				INFOPLIST_FILE = "Alive 2020Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.summerleague.Alive-2020Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Alive 2020.app/Alive 2020";
+			};
+			name = Debug;
+		};
+		D81460701EA9B18E00BA9D6C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = L7KVF73XT4;
+				INFOPLIST_FILE = "Alive 2020Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.summerleague.Alive-2020Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Alive 2020.app/Alive 2020";
+			};
+			name = Release;
+		};
+		D81460721EA9B18E00BA9D6C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = L7KVF73XT4;
+				INFOPLIST_FILE = "Alive 2020UITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.summerleague.Alive-2020UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = "Alive 2020";
+			};
+			name = Debug;
+		};
+		D81460731EA9B18E00BA9D6C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = L7KVF73XT4;
+				INFOPLIST_FILE = "Alive 2020UITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.summerleague.Alive-2020UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = "Alive 2020";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D814603E1EA9B18E00BA9D6C /* Build configuration list for PBXProject "Alive 2020" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D81460691EA9B18E00BA9D6C /* Debug */,
+				D814606A1EA9B18E00BA9D6C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D814606B1EA9B18E00BA9D6C /* Build configuration list for PBXNativeTarget "Alive 2020" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D814606C1EA9B18E00BA9D6C /* Debug */,
+				D814606D1EA9B18E00BA9D6C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D814606E1EA9B18E00BA9D6C /* Build configuration list for PBXNativeTarget "Alive 2020Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D814606F1EA9B18E00BA9D6C /* Debug */,
+				D81460701EA9B18E00BA9D6C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D81460711EA9B18E00BA9D6C /* Build configuration list for PBXNativeTarget "Alive 2020UITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D81460721EA9B18E00BA9D6C /* Debug */,
+				D81460731EA9B18E00BA9D6C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D814603B1EA9B18E00BA9D6C /* Project object */;
+}
