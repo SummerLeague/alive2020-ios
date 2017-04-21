@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5F7CDEE00C05F1358A25C984 /* Pods_Alive_2020.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6D12F33A614AC83EDEA4B80 /* Pods_Alive_2020.framework */; };
 		D81460471EA9B18E00BA9D6C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81460461EA9B18E00BA9D6C /* AppDelegate.swift */; };
 		D814604E1EA9B18E00BA9D6C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D814604D1EA9B18E00BA9D6C /* Assets.xcassets */; };
 		D81460511EA9B18E00BA9D6C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D814604F1EA9B18E00BA9D6C /* LaunchScreen.storyboard */; };
@@ -37,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6BBAFE50CB481F77EF888C32 /* Pods-Alive 2020.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Alive 2020.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Alive 2020/Pods-Alive 2020.debug.xcconfig"; sourceTree = "<group>"; };
+		80D11F6DC69618066C15056B /* Pods-Alive 2020.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Alive 2020.release.xcconfig"; path = "Pods/Target Support Files/Pods-Alive 2020/Pods-Alive 2020.release.xcconfig"; sourceTree = "<group>"; };
 		D81460431EA9B18E00BA9D6C /* Alive 2020.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Alive 2020.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D81460461EA9B18E00BA9D6C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D814604D1EA9B18E00BA9D6C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -53,6 +56,7 @@
 		D81460791EA9B66500BA9D6C /* LivePhotoDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LivePhotoDataSource.swift; sourceTree = "<group>"; };
 		D814607B1EA9B66D00BA9D6C /* LivePhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LivePhotoCell.swift; sourceTree = "<group>"; };
 		D81460811EA9CD2100BA9D6C /* UploadController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadController.swift; sourceTree = "<group>"; };
+		F6D12F33A614AC83EDEA4B80 /* Pods_Alive_2020.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Alive_2020.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F7CDEE00C05F1358A25C984 /* Pods_Alive_2020.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,6 +85,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2DB1DD84439E842DFEB957C9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6BBAFE50CB481F77EF888C32 /* Pods-Alive 2020.debug.xcconfig */,
+				80D11F6DC69618066C15056B /* Pods-Alive 2020.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		2FF0790A0D15A7BE90A44670 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F6D12F33A614AC83EDEA4B80 /* Pods_Alive_2020.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D814603A1EA9B18E00BA9D6C = {
 			isa = PBXGroup;
 			children = (
@@ -87,6 +109,8 @@
 				D814605A1EA9B18E00BA9D6C /* Alive 2020Tests */,
 				D81460651EA9B18E00BA9D6C /* Alive 2020UITests */,
 				D81460441EA9B18E00BA9D6C /* Products */,
+				2DB1DD84439E842DFEB957C9 /* Pods */,
+				2FF0790A0D15A7BE90A44670 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -165,9 +189,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D814606B1EA9B18E00BA9D6C /* Build configuration list for PBXNativeTarget "Alive 2020" */;
 			buildPhases = (
+				7BDE4BD78093A18C88BE6C4F /* [CP] Check Pods Manifest.lock */,
 				D814603F1EA9B18E00BA9D6C /* Sources */,
 				D81460401EA9B18E00BA9D6C /* Frameworks */,
 				D81460411EA9B18E00BA9D6C /* Resources */,
+				18CC18DB7A7AE46A141C3DF2 /* [CP] Embed Pods Frameworks */,
+				EAB84797D8E0F100E19C82A5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -288,6 +315,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		18CC18DB7A7AE46A141C3DF2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Alive 2020/Pods-Alive 2020-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7BDE4BD78093A18C88BE6C4F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		EAB84797D8E0F100E19C82A5 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Alive 2020/Pods-Alive 2020-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D814603F1EA9B18E00BA9D6C /* Sources */ = {
@@ -443,7 +518,9 @@
 		};
 		D814606C1EA9B18E00BA9D6C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6BBAFE50CB481F77EF888C32 /* Pods-Alive 2020.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = L7KVF73XT4;
 				INFOPLIST_FILE = "Alive 2020/Info.plist";
@@ -456,7 +533,9 @@
 		};
 		D814606D1EA9B18E00BA9D6C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 80D11F6DC69618066C15056B /* Pods-Alive 2020.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = L7KVF73XT4;
 				INFOPLIST_FILE = "Alive 2020/Info.plist";
