@@ -12,8 +12,32 @@ class AppCoordinator {
     private let navigationController: UINavigationController
     private let livePhotoDataSource = LivePhotoDataSource()
     
+    enum State {
+        case selecting
+        case uploading
+    }
+    
+    private var state: State = .selecting {
+        didSet {
+            switch state {
+            case .selecting:
+                self.photosController.view.isUserInteractionEnabled = true
+                self.uploadController.showUploadButton()
+            case .uploading:
+                self.photosController.view.isUserInteractionEnabled = false
+                self.uploadController.hideUploadButton()
+            }
+        }
+    }
+    
     private lazy var uploadController: UploadController = {
         let uploadController = UploadController()
+        uploadController.onUpload = {
+            guard self.state == .selecting else { return }
+            
+            self.state = .uploading
+        }
+        
         return uploadController
     }()
     
@@ -21,8 +45,17 @@ class AppCoordinator {
         let viewController = LivePhotoController()
         viewController.view.translatesAutoresizingMaskIntoConstraints = false
         viewController.collectionView.dataSource = self.livePhotoDataSource
-        viewController.onSelected = { indexPaths in
-            self.upload()
+        viewController.onSelection = { selection in
+            guard self.state == .selecting else { return }
+            
+            let title = "Upload \(selection.count) Live Photos"
+            self.uploadController.uploadButton.setTitle(title, for: .normal)
+            
+            if selection.count == 0 {
+                self.uploadController.hide()
+            } else {
+                self.uploadController.show()
+            }
         }
         
         return viewController
@@ -63,6 +96,8 @@ class AppCoordinator {
         
         navigationController.isNavigationBarHidden = true
         navigationController.setViewControllers([uploadController], animated: false)
+        
+        state = .selecting
     }
     
     func upload() {

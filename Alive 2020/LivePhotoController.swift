@@ -10,9 +10,9 @@ import UIKit
 
 class LivePhotoController: UIViewController {
     
-    fileprivate var selectedIndexPaths = Set<IndexPath>()
+    fileprivate var selectedIndexPaths = [IndexPath]()
     
-    var onSelected: ((IndexPath) -> ())? = nil
+    var onSelection: (([IndexPath]) -> ())? = nil
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -58,26 +58,36 @@ extension LivePhotoController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if let livePhotoCell = cell as? LivePhotoCell {
-            livePhotoCell.isSelectionVisible = selectedIndexPaths.contains(indexPath)
+        let livePhotoCell = cell as? LivePhotoCell
+        let isSelected = selectedIndexPaths.contains(indexPath)
+        livePhotoCell?.selectionView.setIsVisible(isSelected, animated: false)
+        
+        if let index = selectedIndexPaths.index(of: indexPath) {
+            livePhotoCell?.selectionView.label.text = "\(index + 1)"
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedIndexPaths.insert(indexPath)
+        selectedIndexPaths.append(indexPath)
+        onSelection?(selectedIndexPaths)
         
-        onSelected?(indexPath)
-        
-        if let cell = collectionView.cellForItem(at: indexPath) as? LivePhotoCell {
-            cell.isSelectionVisible = true
-        }
+        let cell = collectionView.cellForItem(at: indexPath) as? LivePhotoCell
+        cell?.selectionView.setIsVisible(true, animated: true)
+        cell?.selectionView.label.text = "\(selectedIndexPaths.count)"
     }
 
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        selectedIndexPaths.remove(indexPath)
+        if let index = selectedIndexPaths.index(of: indexPath) {
+            selectedIndexPaths.remove(at: index)
+            onSelection?(selectedIndexPaths)
+        }
         
-        if let cell = collectionView.cellForItem(at: indexPath) as? LivePhotoCell {
-            cell.isSelectionVisible = false
+        let cell = collectionView.cellForItem(at: indexPath) as? LivePhotoCell
+        cell?.selectionView.setIsVisible(false, animated: true)
+        
+        for (index, indexPath) in selectedIndexPaths.enumerated() {
+            let cell = collectionView.cellForItem(at: indexPath) as? LivePhotoCell
+            cell?.selectionView.label.text = "\(index + 1)"
         }
     }
 }

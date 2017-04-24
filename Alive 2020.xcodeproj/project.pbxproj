@@ -19,6 +19,7 @@
 		D814607C1EA9B66D00BA9D6C /* LivePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D814607B1EA9B66D00BA9D6C /* LivePhotoCell.swift */; };
 		D81460821EA9CD2100BA9D6C /* UploadController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81460811EA9CD2100BA9D6C /* UploadController.swift */; };
 		D81460861EAD441300BA9D6C /* UploadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81460851EAD441300BA9D6C /* UploadOperation.swift */; };
+		D81460881EAD8B3400BA9D6C /* SelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81460871EAD8B3400BA9D6C /* SelectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		D814607B1EA9B66D00BA9D6C /* LivePhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LivePhotoCell.swift; sourceTree = "<group>"; };
 		D81460811EA9CD2100BA9D6C /* UploadController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadController.swift; sourceTree = "<group>"; };
 		D81460851EAD441300BA9D6C /* UploadOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadOperation.swift; sourceTree = "<group>"; };
+		D81460871EAD8B3400BA9D6C /* SelectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionView.swift; sourceTree = "<group>"; };
 		F6D12F33A614AC83EDEA4B80 /* Pods_Alive_2020.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Alive_2020.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -179,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				D814607B1EA9B66D00BA9D6C /* LivePhotoCell.swift */,
+				D81460871EAD8B3400BA9D6C /* SelectionView.swift */,
 				D81460771EA9B4ED00BA9D6C /* LivePhotoController.swift */,
 				D81460791EA9B66500BA9D6C /* LivePhotoDataSource.swift */,
 			);
@@ -377,6 +380,7 @@
 				D814607A1EA9B66500BA9D6C /* LivePhotoDataSource.swift in Sources */,
 				D81460821EA9CD2100BA9D6C /* UploadController.swift in Sources */,
 				D814607C1EA9B66D00BA9D6C /* LivePhotoCell.swift in Sources */,
+				D81460881EAD8B3400BA9D6C /* SelectionView.swift in Sources */,
 				D81460781EA9B4ED00BA9D6C /* LivePhotoController.swift in Sources */,
 				D81460471EA9B18E00BA9D6C /* AppDelegate.swift in Sources */,
 			);
@@ -532,6 +536,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.summerleague.Alive-2020";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -547,6 +552,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.summerleague.Alive-2020";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
