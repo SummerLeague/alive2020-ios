@@ -10,6 +10,8 @@ import UIKit
 
 class UploadController: UIViewController {
     
+    private var uploadConstraint: NSLayoutConstraint? = nil
+    
     lazy var contentView: UIView = {
         let view = UIView(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -26,7 +28,7 @@ class UploadController: UIViewController {
     lazy var progressView: UIProgressView = {
         let view = UIProgressView(progressViewStyle: .default)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.progress = 0.33
+        view.progress = 0.0
         return view
     }()
     
@@ -54,11 +56,13 @@ class UploadController: UIViewController {
         view.addConstraint(NSLayoutConstraint(item: contentView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1.0, constant: 0.0))
         view.addConstraint(NSLayoutConstraint(item: contentView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1.0, constant: 0.0))
         
-        view.addConstraint(NSLayoutConstraint(item: blurView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1.0, constant: 0.0))
+        let uploadConstraint = NSLayoutConstraint(item: blurView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1.0, constant: 60.0)
+        self.uploadConstraint = uploadConstraint
+        view.addConstraint(uploadConstraint)
         view.addConstraint(NSLayoutConstraint(item: blurView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1.0, constant: 0.0))
         view.addConstraint(NSLayoutConstraint(item: blurView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1.0, constant: 0.0))
         view.addConstraint(NSLayoutConstraint(item: blurView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 60.0))
-
+        
         blurView.addConstraint(NSLayoutConstraint(item: progressView, attribute: .top, relatedBy: .equal, toItem: blurView, attribute: .top, multiplier: 1.0, constant: 0.0))
         blurView.addConstraint(NSLayoutConstraint(item: progressView, attribute: .leading, relatedBy: .equal, toItem: blurView, attribute: .leading, multiplier: 1.0, constant: 0.0))
         blurView.addConstraint(NSLayoutConstraint(item: progressView, attribute: .trailing, relatedBy: .equal, toItem: blurView, attribute: .trailing, multiplier: 1.0, constant: 0.0))
@@ -70,5 +74,31 @@ class UploadController: UIViewController {
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
+    }
+    
+    func show() {
+        guard self.uploadConstraint?.constant != 0.0 else { return }
+        progressView.progress = 0.0
+        animate(constant: 0.0, completion: nil)
+    }
+    
+    func hide() {
+        guard self.uploadConstraint?.constant != 60.0 else { return }
+        animate(constant: 60.0) { (completed) in
+            self.progressView.progress = 0.0
+        }
+    }
+    
+    private func animate(constant: CGFloat, completion: ((Bool) -> ())?) {
+        UIView.animate(
+            withDuration: 0.2,
+            delay: 0.0,
+            usingSpringWithDamping: 1.0,
+            initialSpringVelocity: 1.0,
+            options: UIViewAnimationOptions(rawValue: 0),
+            animations: {
+                self.uploadConstraint?.constant = constant
+                self.view.layoutIfNeeded()
+            }, completion: completion)
     }
 }

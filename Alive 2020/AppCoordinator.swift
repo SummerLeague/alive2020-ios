@@ -11,7 +11,7 @@ import UIKit
 class AppCoordinator {
     private let navigationController: UINavigationController
     private let livePhotoDataSource = LivePhotoDataSource()
-   
+    
     private lazy var uploadController: UploadController = {
         let uploadController = UploadController()
         return uploadController
@@ -21,10 +21,31 @@ class AppCoordinator {
         let viewController = LivePhotoController()
         viewController.view.translatesAutoresizingMaskIntoConstraints = false
         viewController.collectionView.dataSource = self.livePhotoDataSource
-        viewController.onSelected = { (indexPaths) in
-            
+        viewController.onSelected = { indexPaths in
+            self.upload()
         }
+        
         return viewController
+    }()
+   
+    private var uploads = [UploadOperation]() {
+        didSet {
+            let label = "Uploading \(self.currentUploadIndex + 1) of \(self.uploads.count) Live Photos."
+            self.uploadController.progressLabel.text = label
+        }
+    }
+    
+    private var currentUploadIndex: Int = 0 {
+        didSet {
+            let label = "Uploading \(self.currentUploadIndex + 1) of \(self.uploads.count) Live Photos."
+            self.uploadController.progressLabel.text = label
+        }
+    }
+    
+    private lazy var queue: OperationQueue = {
+        let queue = OperationQueue()
+        queue.maxConcurrentOperationCount = 1
+        return queue
     }()
     
     init(navigationController: UINavigationController) {
@@ -42,5 +63,36 @@ class AppCoordinator {
         
         navigationController.isNavigationBarHidden = true
         navigationController.setViewControllers([uploadController], animated: false)
+    }
+    
+    func upload() {
+        let operation = UploadOperation(start: { (operation) in
+            DispatchQueue.main.async {
+                guard let index = self.uploads.index(of: operation) else {
+                    return
+                }
+               
+                self.currentUploadIndex = index
+                self.uploadController.progressView.progress = 0
+            }
+        }) { (progress) in
+            DispatchQueue.main.async {
+                let percent = Float(progress.fractionCompleted)
+                self.uploadController.progressView.progress = percent
+            }
+        }
+        operation.completionBlock = {
+            DispatchQueue.main.async {
+                
+                guard self.queue.operationCount == 0 else { return }
+                
+                self.uploads.removeAll()
+                self.uploadController.hide()
+            }
+        }
+       
+        uploads.append(operation)
+        queue.addOperation(operation)
+        uploadController.show()
     }
 }

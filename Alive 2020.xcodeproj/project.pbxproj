@@ -18,6 +18,7 @@
 		D814607A1EA9B66500BA9D6C /* LivePhotoDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81460791EA9B66500BA9D6C /* LivePhotoDataSource.swift */; };
 		D814607C1EA9B66D00BA9D6C /* LivePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D814607B1EA9B66D00BA9D6C /* LivePhotoCell.swift */; };
 		D81460821EA9CD2100BA9D6C /* UploadController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81460811EA9CD2100BA9D6C /* UploadController.swift */; };
+		D81460861EAD441300BA9D6C /* UploadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81460851EAD441300BA9D6C /* UploadOperation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		D81460791EA9B66500BA9D6C /* LivePhotoDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LivePhotoDataSource.swift; sourceTree = "<group>"; };
 		D814607B1EA9B66D00BA9D6C /* LivePhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LivePhotoCell.swift; sourceTree = "<group>"; };
 		D81460811EA9CD2100BA9D6C /* UploadController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadController.swift; sourceTree = "<group>"; };
+		D81460851EAD441300BA9D6C /* UploadOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadOperation.swift; sourceTree = "<group>"; };
 		F6D12F33A614AC83EDEA4B80 /* Pods_Alive_2020.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Alive_2020.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -168,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				D81460811EA9CD2100BA9D6C /* UploadController.swift */,
+				D81460851EAD441300BA9D6C /* UploadOperation.swift */,
 			);
 			name = Upload;
 			sourceTree = "<group>";
@@ -370,6 +373,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D81460751EA9B44300BA9D6C /* AppCoordinator.swift in Sources */,
+				D81460861EAD441300BA9D6C /* UploadOperation.swift in Sources */,
 				D814607A1EA9B66500BA9D6C /* LivePhotoDataSource.swift in Sources */,
 				D81460821EA9CD2100BA9D6C /* UploadController.swift in Sources */,
 				D814607C1EA9B66D00BA9D6C /* LivePhotoCell.swift in Sources */,

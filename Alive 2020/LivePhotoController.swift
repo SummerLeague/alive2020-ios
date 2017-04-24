@@ -12,7 +12,7 @@ class LivePhotoController: UIViewController {
     
     fileprivate var selectedIndexPaths = Set<IndexPath>()
     
-    var onSelected: (([IndexPath]) -> ())? = nil
+    var onSelected: ((IndexPath) -> ())? = nil
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -65,6 +65,8 @@ extension LivePhotoController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedIndexPaths.insert(indexPath)
+        
+        onSelected?(indexPath)
         
         if let cell = collectionView.cellForItem(at: indexPath) as? LivePhotoCell {
             cell.isSelectionVisible = true
