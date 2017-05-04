@@ -52,10 +52,9 @@ class SelectionCoordinator {
     func start() {
         containerViewController.addChildViewController(photosController)
         containerView.addSubview(photosController.view)
-        containerView.addConstraint(NSLayoutConstraint(item: photosController.view, attribute: .top, relatedBy: .equal, toItem: containerView, attribute: .top, multiplier: 1.0, constant: 0.0))
-        containerView.addConstraint(NSLayoutConstraint(item: photosController.view, attribute: .bottom, relatedBy: .equal, toItem: containerView, attribute: .bottom, multiplier: 1.0, constant: 0.0))
-        containerView.addConstraint(NSLayoutConstraint(item: photosController.view, attribute: .leading, relatedBy: .equal, toItem: containerView, attribute: .leading, multiplier: 1.0, constant: 0.0))
-        containerView.addConstraint(NSLayoutConstraint(item: photosController.view, attribute: .trailing, relatedBy: .equal, toItem: containerView, attribute: .trailing, multiplier: 1.0, constant: 0.0))
+        photosController.view.snp.makeConstraints { make in
+            make.top.bottom.leading.trailing.equalTo(containerView)
+        }
         photosController.didMove(toParentViewController: containerViewController)
     }
    

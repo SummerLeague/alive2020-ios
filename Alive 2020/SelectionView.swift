@@ -51,19 +51,20 @@ class SelectionView: UIView {
         addSubview(overlay)
         addSubview(labelBackground)
         
-        addConstraint(NSLayoutConstraint(item: overlay, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 0))
-        addConstraint(NSLayoutConstraint(item: overlay, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: 0))
-        addConstraint(NSLayoutConstraint(item: overlay, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1, constant: 0))
-        addConstraint(NSLayoutConstraint(item: overlay, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1, constant: 0))
+        overlay.snp.makeConstraints { make in
+            make.top.bottom.leading.trailing.equalTo(self)
+        }
+       
+        labelBackground.snp.makeConstraints { make in
+            make.bottom.trailing.equalTo(self).offset(-4.0)
+            make.width.height.equalTo(SelectionView.kSelectionSize)
+        }
         
-        addConstraint(NSLayoutConstraint(item: labelBackground, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: -4))
-        addConstraint(NSLayoutConstraint(item: labelBackground, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1, constant: -4))
-        addConstraint(NSLayoutConstraint(item: labelBackground, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: SelectionView.kSelectionSize))
-        addConstraint(NSLayoutConstraint(item: labelBackground, attribute: .height, relatedBy: .equal, toItem: labelBackground, attribute: .width, multiplier: 1, constant: 0))
-
-        labelBackground.addConstraint(NSLayoutConstraint(item: label, attribute: .centerY, relatedBy: .equal, toItem: labelBackground, attribute: .centerY, multiplier: 1, constant: 0))
-        labelBackground.addConstraint(NSLayoutConstraint(item: label, attribute: .leading, relatedBy: .equal, toItem: labelBackground, attribute: .leading, multiplier: 1, constant: 4))
-        labelBackground.addConstraint(NSLayoutConstraint(item: label, attribute: .trailing, relatedBy: .equal, toItem: labelBackground, attribute: .trailing, multiplier: 1, constant: -4))
+        label.snp.makeConstraints { make in
+            make.centerY.equalTo(labelBackground)
+            make.leading.equalTo(labelBackground).offset(4.0)
+            make.trailing.equalTo(labelBackground).offset(-4.0)
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

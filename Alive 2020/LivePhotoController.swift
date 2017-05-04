@@ -39,10 +39,9 @@ class LivePhotoController: UIViewController {
         view.backgroundColor = UIColor.black
         view.addSubview(collectionView)
 
-        view.addConstraint(NSLayoutConstraint(item: collectionView, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1.0, constant: 0.0))
-        view.addConstraint(NSLayoutConstraint(item: collectionView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1.0, constant: 0.0))
-        view.addConstraint(NSLayoutConstraint(item: collectionView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1.0, constant: 0.0))
-        view.addConstraint(NSLayoutConstraint(item: collectionView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1.0, constant: 0.0))
+        collectionView.snp.makeConstraints { make in
+            make.top.bottom.leading.trailing.equalTo(view)
+        }
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

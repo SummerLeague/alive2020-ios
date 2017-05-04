@@ -65,30 +65,33 @@ class UploadController: UIViewController {
         blurView.addSubview(progressView)
         blurView.addSubview(progressLabel)
         
-        view.addConstraint(NSLayoutConstraint(item: contentView, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1.0, constant: 0.0))
-        view.addConstraint(NSLayoutConstraint(item: contentView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1.0, constant: 0.0))
-        view.addConstraint(NSLayoutConstraint(item: contentView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1.0, constant: 0.0))
-        view.addConstraint(NSLayoutConstraint(item: contentView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1.0, constant: 0.0))
+        contentView.snp.makeConstraints { make in
+            make.top.bottom.leading.trailing.equalTo(view)
+        }
+       
+        blurView.snp.makeConstraints { make in
+            make.leading.trailing.equalTo(view)
+            make.height.equalTo(60.0)
+        }
         
         let uploadConstraint = NSLayoutConstraint(item: blurView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1.0, constant: 60.0)
         self.uploadConstraint = uploadConstraint
         view.addConstraint(uploadConstraint)
-        view.addConstraint(NSLayoutConstraint(item: blurView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1.0, constant: 0.0))
-        view.addConstraint(NSLayoutConstraint(item: blurView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1.0, constant: 0.0))
-        view.addConstraint(NSLayoutConstraint(item: blurView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 60.0))
-
-        blurView.addConstraint(NSLayoutConstraint(item: uploadButton, attribute: .top, relatedBy: .equal, toItem: blurView, attribute: .top, multiplier: 1.0, constant: 10.0))
-        blurView.addConstraint(NSLayoutConstraint(item: uploadButton, attribute: .bottom, relatedBy: .equal, toItem: blurView, attribute: .bottom, multiplier: 1.0, constant: -10.0))
-        blurView.addConstraint(NSLayoutConstraint(item: uploadButton, attribute: .centerX, relatedBy: .equal, toItem: blurView, attribute: .centerX, multiplier: 1.0, constant: 0.0))
-        blurView.addConstraint(NSLayoutConstraint(item: uploadButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 200.0))
         
-        blurView.addConstraint(NSLayoutConstraint(item: progressView, attribute: .top, relatedBy: .equal, toItem: blurView, attribute: .top, multiplier: 1.0, constant: 0.0))
-        blurView.addConstraint(NSLayoutConstraint(item: progressView, attribute: .leading, relatedBy: .equal, toItem: blurView, attribute: .leading, multiplier: 1.0, constant: 0.0))
-        blurView.addConstraint(NSLayoutConstraint(item: progressView, attribute: .trailing, relatedBy: .equal, toItem: blurView, attribute: .trailing, multiplier: 1.0, constant: 0.0))
+        uploadButton.snp.makeConstraints { make in
+            make.top.equalTo(blurView).offset(10.0)
+            make.bottom.equalTo(blurView).offset(-10.0)
+            make.centerX.equalTo(blurView)
+            make.width.equalTo(200.0)
+        }
+       
+        progressView.snp.makeConstraints { make in
+            make.top.leading.trailing.equalTo(blurView)
+        }
 
-        blurView.addConstraint(NSLayoutConstraint(item: progressLabel, attribute: .centerY, relatedBy: .equal, toItem: blurView, attribute: .centerY, multiplier: 1.0, constant: 0.0))
-        blurView.addConstraint(NSLayoutConstraint(item: progressLabel, attribute: .leading, relatedBy: .equal, toItem: blurView, attribute: .leading, multiplier: 1.0, constant: 0.0))
-        blurView.addConstraint(NSLayoutConstraint(item: progressLabel, attribute: .trailing, relatedBy: .equal, toItem: blurView, attribute: .trailing, multiplier: 1.0, constant: 0.0))
+        progressLabel.snp.makeConstraints { make in
+            make.centerY.leading.trailing.equalTo(blurView)
+        }
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
