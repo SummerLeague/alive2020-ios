@@ -57,6 +57,8 @@ class UploadController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        automaticallyAdjustsScrollViewInsets = false
+        
         view.addSubview(contentView)
         view.addSubview(blurView)
         blurView.addSubview(uploadButton)

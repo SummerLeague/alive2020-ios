@@ -16,10 +16,14 @@
 		D81460751EA9B44300BA9D6C /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81460741EA9B44300BA9D6C /* AppCoordinator.swift */; };
 		D81460781EA9B4ED00BA9D6C /* LivePhotoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81460771EA9B4ED00BA9D6C /* LivePhotoController.swift */; };
 		D814607A1EA9B66500BA9D6C /* LivePhotoDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81460791EA9B66500BA9D6C /* LivePhotoDataSource.swift */; };
-		D814607C1EA9B66D00BA9D6C /* LivePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D814607B1EA9B66D00BA9D6C /* LivePhotoCell.swift */; };
 		D81460821EA9CD2100BA9D6C /* UploadController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81460811EA9CD2100BA9D6C /* UploadController.swift */; };
 		D81460861EAD441300BA9D6C /* UploadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81460851EAD441300BA9D6C /* UploadOperation.swift */; };
 		D81460881EAD8B3400BA9D6C /* SelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81460871EAD8B3400BA9D6C /* SelectionView.swift */; };
+		D89C1E101EB030EA00644CE3 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89C1E0F1EB030EA00644CE3 /* ImageCell.swift */; };
+		D89C1E121EB0387000644CE3 /* AVPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89C1E111EB0387000644CE3 /* AVPlayerView.swift */; };
+		D89C1E141EB048AC00644CE3 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89C1E131EB048AC00644CE3 /* VideoCell.swift */; };
+		D89C1E181EB0582D00644CE3 /* SelectionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89C1E171EB0582D00644CE3 /* SelectionCoordinator.swift */; };
+		D8F2ACDE1EBAD6E100BFA4B9 /* LoadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F2ACDD1EBAD6E100BFA4B9 /* LoadOperation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,10 +60,14 @@
 		D81460741EA9B44300BA9D6C /* AppCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		D81460771EA9B4ED00BA9D6C /* LivePhotoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LivePhotoController.swift; sourceTree = "<group>"; };
 		D81460791EA9B66500BA9D6C /* LivePhotoDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LivePhotoDataSource.swift; sourceTree = "<group>"; };
-		D814607B1EA9B66D00BA9D6C /* LivePhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LivePhotoCell.swift; sourceTree = "<group>"; };
 		D81460811EA9CD2100BA9D6C /* UploadController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadController.swift; sourceTree = "<group>"; };
 		D81460851EAD441300BA9D6C /* UploadOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadOperation.swift; sourceTree = "<group>"; };
 		D81460871EAD8B3400BA9D6C /* SelectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionView.swift; sourceTree = "<group>"; };
+		D89C1E0F1EB030EA00644CE3 /* ImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
+		D89C1E111EB0387000644CE3 /* AVPlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVPlayerView.swift; sourceTree = "<group>"; };
+		D89C1E131EB048AC00644CE3 /* VideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
+		D89C1E171EB0582D00644CE3 /* SelectionCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionCoordinator.swift; sourceTree = "<group>"; };
+		D8F2ACDD1EBAD6E100BFA4B9 /* LoadOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadOperation.swift; sourceTree = "<group>"; };
 		F6D12F33A614AC83EDEA4B80 /* Pods_Alive_2020.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Alive_2020.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -180,10 +188,14 @@
 		D81460801EA9CC4D00BA9D6C /* Selection */ = {
 			isa = PBXGroup;
 			children = (
-				D814607B1EA9B66D00BA9D6C /* LivePhotoCell.swift */,
-				D81460871EAD8B3400BA9D6C /* SelectionView.swift */,
+				D89C1E111EB0387000644CE3 /* AVPlayerView.swift */,
+				D89C1E0F1EB030EA00644CE3 /* ImageCell.swift */,
 				D81460771EA9B4ED00BA9D6C /* LivePhotoController.swift */,
 				D81460791EA9B66500BA9D6C /* LivePhotoDataSource.swift */,
+				D8F2ACDD1EBAD6E100BFA4B9 /* LoadOperation.swift */,
+				D89C1E171EB0582D00644CE3 /* SelectionCoordinator.swift */,
+				D81460871EAD8B3400BA9D6C /* SelectionView.swift */,
+				D89C1E131EB048AC00644CE3 /* VideoCell.swift */,
 			);
 			name = Selection;
 			sourceTree = "<group>";
@@ -376,12 +388,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				D81460751EA9B44300BA9D6C /* AppCoordinator.swift in Sources */,
+				D8F2ACDE1EBAD6E100BFA4B9 /* LoadOperation.swift in Sources */,
 				D81460861EAD441300BA9D6C /* UploadOperation.swift in Sources */,
 				D814607A1EA9B66500BA9D6C /* LivePhotoDataSource.swift in Sources */,
+				D89C1E181EB0582D00644CE3 /* SelectionCoordinator.swift in Sources */,
 				D81460821EA9CD2100BA9D6C /* UploadController.swift in Sources */,
-				D814607C1EA9B66D00BA9D6C /* LivePhotoCell.swift in Sources */,
+				D89C1E121EB0387000644CE3 /* AVPlayerView.swift in Sources */,
 				D81460881EAD8B3400BA9D6C /* SelectionView.swift in Sources */,
+				D89C1E141EB048AC00644CE3 /* VideoCell.swift in Sources */,
 				D81460781EA9B4ED00BA9D6C /* LivePhotoController.swift in Sources */,
+				D89C1E101EB030EA00644CE3 /* ImageCell.swift in Sources */,
 				D81460471EA9B18E00BA9D6C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

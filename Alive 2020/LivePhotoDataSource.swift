@@ -12,14 +12,21 @@ import Photos
 class LivePhotoDataSource: NSObject {
     let imageManager = PHImageManager.default()
     let cachingImageManager = PHCachingImageManager()
+    let resourceManager = PHAssetResourceManager.default()
    
+    let queue: OperationQueue = {
+        let queue = OperationQueue()
+        queue.maxConcurrentOperationCount = 1
+        return queue
+    }()
+    
     fileprivate var assets: [PHAsset] {
         willSet {
            self.cachingImageManager.stopCachingImagesForAllAssets()
         }
-        didSet(value) {
+        didSet {
             self.cachingImageManager.startCachingImages(
-                for: value,
+                for: assets,
                 targetSize: PHImageManagerMaximumSize,
                 contentMode: .aspectFit,
                 options: nil)
@@ -30,11 +37,39 @@ class LivePhotoDataSource: NSObject {
         assets = fetchLivePhotos()
         super.init()
     }
+
+    func thumbnail(at indexPath: IndexPath, completion: @escaping (UIImage?) -> ()) -> PHImageRequestID {
+        let asset = assets[indexPath.item]
+        let size = CGSize(width: 512, height: 512)
+        let options = PHImageRequestOptions()
+        options.isSynchronous = false
+        
+        return cachingImageManager.requestImage(
+            for: asset,
+            targetSize: size,
+            contentMode: .aspectFill,
+            options: options) { (image, info) in
+            completion(image)
+        }
+    }
     
-    func livePhoto(indexPath: IndexPath, completion: @escaping (PHLivePhoto?) -> ()) -> PHImageRequestID {
+    func video(at indexPath: IndexPath, completion: @escaping (AVURLAsset?) -> ()) {
+        let asset = self.assets[indexPath.item]
+        let operation = LoadOperation(
+            asset: asset,
+            resourceManager: resourceManager)
+        operation.completionBlock = {
+            completion(operation.outputAsset)
+        }
+        
+        queue.cancelAllOperations()
+        queue.addOperation(operation)
+    }
+   
+    func livePhoto(at indexPath: IndexPath, completion: @escaping (PHLivePhoto?) -> ()) -> PHImageRequestID {
         let asset = assets[indexPath.item]
         let options = PHLivePhotoRequestOptions()
-        options.deliveryMode = .highQualityFormat
+        options.deliveryMode = .opportunistic
        
         let request = imageManager.requestLivePhoto(
             for: asset,
@@ -54,16 +89,13 @@ extension LivePhotoDataSource: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-        cell.backgroundColor = UIColor.black
-        
-        if let livePhotoCell = cell as? LivePhotoCell {
-            let _ = livePhoto(indexPath: indexPath, completion: { (livePhoto) in
-                livePhotoCell.livePhotoView.livePhoto = livePhoto
-                livePhotoCell.livePhotoView.startPlayback(with: .full)
-            })
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: "cell",
+            for: indexPath)
+        let videoCell = cell as? VideoCell
+        let _ = thumbnail(at: indexPath) { (image) in
+            videoCell?.imageView.image = image
         }
-        
         return cell
     }
 }
@@ -71,8 +103,12 @@ extension LivePhotoDataSource: UICollectionViewDataSource {
 // Pull all live photos, sort by latest
 func fetchLivePhotos() -> [PHAsset] {
     let options = PHFetchOptions()
-    options.predicate = NSPredicate(format: "mediaSubtype == %ld", PHAssetMediaSubtype.photoLive.rawValue)
-    options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+    options.predicate = NSPredicate(
+        format: "mediaSubtype == %ld",
+        PHAssetMediaSubtype.photoLive.rawValue)
+    options.sortDescriptors = [
+        NSSortDescriptor(key: "creationDate", ascending: false)
+    ]
 
     var assets = [PHAsset]()
    
