@@ -43,6 +43,8 @@ class LivePhotoDataSource: NSObject {
         let asset = assets[indexPath.item]
         let size = CGSize(width: 512, height: 512)
         let options = PHImageRequestOptions()
+        options.deliveryMode = .opportunistic
+        options.resizeMode = .fast
         options.isSynchronous = false
         
         return cachingImageManager.requestImage(

@@ -51,11 +51,16 @@ class LoadOperation: Operation {
         super.init()
     }
     
-    deinit {
-        print("~deinit")
-    }
-    
     override func start() {
+        guard !isCancelled else {
+            state = .finished
+            return
+        }
+        
+        // Require cell to be visible for at least 0.2 seconds. This might
+        // reduce loads during scrolling
+        Thread.sleep(forTimeInterval: 0.2)
+    
         guard !isCancelled else {
             state = .finished
             return
@@ -79,6 +84,7 @@ class LoadOperation: Operation {
         let mutableData = NSMutableData()
         
         self.requestId = resourceManager.requestData(for: pairedVideo, options: nil, dataReceivedHandler: { (data) in
+            guard !self.isCancelled else { return }
             mutableData.append(data)
         }) { (error) in
             guard error == nil else {
