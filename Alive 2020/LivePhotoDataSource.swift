@@ -16,6 +16,7 @@ class LivePhotoDataSource: NSObject {
    
     let queue: OperationQueue = {
         let queue = OperationQueue()
+        queue.qualityOfService = .userInteractive
         queue.maxConcurrentOperationCount = 1
         return queue
     }()
@@ -27,7 +28,7 @@ class LivePhotoDataSource: NSObject {
         didSet {
             self.cachingImageManager.startCachingImages(
                 for: assets,
-                targetSize: PHImageManagerMaximumSize,
+                targetSize: CGSize(width: 512, height: 512),
                 contentMode: .aspectFit,
                 options: nil)
         }
@@ -58,8 +59,9 @@ class LivePhotoDataSource: NSObject {
         let operation = LoadOperation(
             asset: asset,
             resourceManager: resourceManager)
+        weak var weakOp = operation
         operation.completionBlock = {
-            completion(operation.outputAsset)
+            completion(weakOp?.outputAsset)
         }
         
         queue.cancelAllOperations()
