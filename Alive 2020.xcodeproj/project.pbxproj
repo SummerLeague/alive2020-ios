@@ -23,6 +23,10 @@
 		D89C1E121EB0387000644CE3 /* AVPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89C1E111EB0387000644CE3 /* AVPlayerView.swift */; };
 		D89C1E141EB048AC00644CE3 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89C1E131EB048AC00644CE3 /* VideoCell.swift */; };
 		D89C1E181EB0582D00644CE3 /* SelectionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89C1E171EB0582D00644CE3 /* SelectionCoordinator.swift */; };
+		D8F073781EC7D13A00E5B0B1 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F073771EC7D13A00E5B0B1 /* WebService.swift */; };
+		D8F0737F1EC8AE0D00E5B0B1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F0737E1EC8AE0D00E5B0B1 /* User.swift */; };
+		D8F073811EC8AFB700E5B0B1 /* StoryJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F073801EC8AFB700E5B0B1 /* StoryJob.swift */; };
+		D8F073871EC8B20A00E5B0B1 /* AliveAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F073861EC8B20A00E5B0B1 /* AliveAPI.swift */; };
 		D8F2ACDE1EBAD6E100BFA4B9 /* LoadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F2ACDD1EBAD6E100BFA4B9 /* LoadOperation.swift */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +71,10 @@
 		D89C1E111EB0387000644CE3 /* AVPlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVPlayerView.swift; sourceTree = "<group>"; };
 		D89C1E131EB048AC00644CE3 /* VideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
 		D89C1E171EB0582D00644CE3 /* SelectionCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionCoordinator.swift; sourceTree = "<group>"; };
+		D8F073771EC7D13A00E5B0B1 /* WebService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
+		D8F0737E1EC8AE0D00E5B0B1 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Models/User.swift; sourceTree = "<group>"; };
+		D8F073801EC8AFB700E5B0B1 /* StoryJob.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StoryJob.swift; path = Models/StoryJob.swift; sourceTree = "<group>"; };
+		D8F073861EC8B20A00E5B0B1 /* AliveAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AliveAPI.swift; path = Network/AliveAPI.swift; sourceTree = "<group>"; };
 		D8F2ACDD1EBAD6E100BFA4B9 /* LoadOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadOperation.swift; sourceTree = "<group>"; };
 		F6D12F33A614AC83EDEA4B80 /* Pods_Alive_2020.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Alive_2020.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -168,10 +176,12 @@
 		D81460761EA9B4D100BA9D6C /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				D8F0737D1EC8ADFD00E5B0B1 /* Models */,
+				D8F073831EC8B00B00E5B0B1 /* Network */,
 				D81460801EA9CC4D00BA9D6C /* Selection */,
 				D814607D1EA9CC3C00BA9D6C /* Upload */,
-				D81460461EA9B18E00BA9D6C /* AppDelegate.swift */,
 				D81460741EA9B44300BA9D6C /* AppCoordinator.swift */,
+				D81460461EA9B18E00BA9D6C /* AppDelegate.swift */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -198,6 +208,24 @@
 				D89C1E131EB048AC00644CE3 /* VideoCell.swift */,
 			);
 			name = Selection;
+			sourceTree = "<group>";
+		};
+		D8F0737D1EC8ADFD00E5B0B1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D8F0737E1EC8AE0D00E5B0B1 /* User.swift */,
+				D8F073801EC8AFB700E5B0B1 /* StoryJob.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		D8F073831EC8B00B00E5B0B1 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				D8F073771EC7D13A00E5B0B1 /* WebService.swift */,
+				D8F073861EC8B20A00E5B0B1 /* AliveAPI.swift */,
+			);
+			name = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -362,7 +390,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		EAB84797D8E0F100E19C82A5 /* [CP] Copy Pods Resources */ = {
@@ -387,7 +415,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8F073781EC7D13A00E5B0B1 /* WebService.swift in Sources */,
 				D81460751EA9B44300BA9D6C /* AppCoordinator.swift in Sources */,
+				D8F0737F1EC8AE0D00E5B0B1 /* User.swift in Sources */,
+				D8F073871EC8B20A00E5B0B1 /* AliveAPI.swift in Sources */,
 				D8F2ACDE1EBAD6E100BFA4B9 /* LoadOperation.swift in Sources */,
 				D81460861EAD441300BA9D6C /* UploadOperation.swift in Sources */,
 				D814607A1EA9B66500BA9D6C /* LivePhotoDataSource.swift in Sources */,
@@ -399,6 +430,7 @@
 				D81460781EA9B4ED00BA9D6C /* LivePhotoController.swift in Sources */,
 				D89C1E101EB030EA00644CE3 /* ImageCell.swift in Sources */,
 				D81460471EA9B18E00BA9D6C /* AppDelegate.swift in Sources */,
+				D8F073811EC8AFB700E5B0B1 /* StoryJob.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
