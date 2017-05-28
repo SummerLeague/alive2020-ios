@@ -73,13 +73,18 @@ class SelectionCoordinator {
         
         livePhotoDataSource.video(at: indexPath) { (asset) in
             guard let asset = asset else { return }
-            let item = AVPlayerItem(asset: asset)
-            
-            DispatchQueue.main.async {
-                let collectionView = self.photosController.collectionView
-                let cell = collectionView.cellForItem(at: indexPath) as? VideoCell
-                cell?.play(item: item)
-            }
+           
+            asset.loadValuesAsynchronously(
+                forKeys: ["playable"],
+                completionHandler: {
+                    let item = AVPlayerItem(asset: asset)
+                    
+                    DispatchQueue.main.async {
+                        let collectionView = self.photosController.collectionView
+                        let cell = collectionView.cellForItem(at: indexPath) as? VideoCell
+                        cell?.play(item: item)
+                    }
+            })
         }
     }
 }

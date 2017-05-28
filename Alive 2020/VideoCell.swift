@@ -11,7 +11,7 @@ import AVFoundation
 
 class VideoCell: UICollectionViewCell {
     
-    private let player = AVQueuePlayer()
+    private let player = AVPlayer()
     private var looper: AVPlayerLooper? = nil
     
     lazy var playerView: AVPlayerView = {
@@ -56,12 +56,12 @@ class VideoCell: UICollectionViewCell {
         
         imageView.image = nil
         imageView.layer.opacity = 1.0
+    
+        player.pause()
     }
     
     func play(item: AVPlayerItem) {
-        player.pause()
-
-        looper = AVPlayerLooper(player: player, templateItem: item)
+//        player.pause()
         player.replaceCurrentItem(with: item)
         player.play()
         
@@ -76,8 +76,7 @@ class VideoCell: UICollectionViewCell {
     
     func stop() {
         player.pause()
-        player.replaceCurrentItem(with: nil)
-        
+
         UIView.animate(
             withDuration: 0.2,
             delay: 0.0,
