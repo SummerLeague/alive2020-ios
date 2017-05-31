@@ -46,6 +46,7 @@ class LivePhotoDataSource: NSObject {
         options.deliveryMode = .opportunistic
         options.resizeMode = .fast
         options.isSynchronous = false
+        options.isNetworkAccessAllowed = true
         
         return cachingImageManager.requestImage(
             for: asset,
@@ -74,6 +75,7 @@ class LivePhotoDataSource: NSObject {
         let asset = assets[indexPath.item]
         let options = PHLivePhotoRequestOptions()
         options.deliveryMode = .opportunistic
+        options.isNetworkAccessAllowed = true
        
         let request = imageManager.requestLivePhoto(
             for: asset,

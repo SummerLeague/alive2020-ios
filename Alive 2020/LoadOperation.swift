@@ -59,15 +59,15 @@ class LoadOperation: Operation {
         
         // Require cell to be visible for at least 0.2 seconds. This might
         // reduce loads during scrolling
-        Thread.sleep(forTimeInterval: 0.2)
+//        Thread.sleep(forTimeInterval: 0.2)
     
         guard !isCancelled else {
             state = .finished
             return
         }
-        
-        let options = PHLivePhotoRequestOptions()
-        options.deliveryMode = .highQualityFormat
+       
+        let options = PHAssetResourceRequestOptions()
+        options.isNetworkAccessAllowed = true
         
         // get paired video for asset
         let resources = PHAssetResource.assetResources(for: asset)
@@ -83,9 +83,12 @@ class LoadOperation: Operation {
         let url = URL(fileURLWithPath: path)
         let mutableData = NSMutableData()
         
-        self.requestId = resourceManager.requestData(for: pairedVideo, options: nil, dataReceivedHandler: { (data) in
-            guard !self.isCancelled else { return }
-            mutableData.append(data)
+        self.requestId = resourceManager.requestData(
+            for: pairedVideo,
+            options: options,
+            dataReceivedHandler: { (data) in
+                guard !self.isCancelled else { return }
+                mutableData.append(data)
         }) { (error) in
             guard error == nil else {
                 self.state = .finished
