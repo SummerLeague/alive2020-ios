@@ -7,107 +7,171 @@
 //
 
 import UIKit
+import AVFoundation
+import SnapKit
 
-class AppCoordinator {
+class AppCoordinator: NSObject {
     private let navigationController: UINavigationController
+    private let livePhotoManager = LivePhotoManager()
+    private let viewController = UIViewController()
+    private var timelineConstraint: Constraint? = nil
     
-    enum State {
-        case selecting
-        case uploading
-    }
+    fileprivate var activeIndexPath: IndexPath? = nil
+    fileprivate var selectedIndexPaths = [IndexPath]()
     
-    private var state: State = .selecting {
-        didSet {
-            switch state {
-            case .selecting:
-//                self.photosController.view.isUserInteractionEnabled = true
-                self.uploadController.showUploadButton()
-            case .uploading:
-//                self.photosController.view.isUserInteractionEnabled = false
-                self.uploadController.hideUploadButton()
-            }
-        }
-    }
-    
-    private lazy var selectionCoordinator: SelectionCoordinator = {
-        let coordinator = SelectionCoordinator(
-            container: self.uploadController,
-            containerView: self.uploadController.contentView)
-        return coordinator
-    }()
-    
-    private lazy var uploadController: UploadController = {
-        let uploadController = UploadController()
-        uploadController.onUpload = {
-            guard self.state == .selecting else { return }
-            
-            self.state = .uploading
-        }
+    fileprivate lazy var livePhotoViewController: LivePhotoViewController = {
+        let viewController = LivePhotoViewController()
+        viewController.delegate = self
+        viewController.dataSource = self.livePhotoManager
         
-        return uploadController
+        // So we can present playback over live photos but under timeline
+        viewController.definesPresentationContext = true
+        
+        return viewController
     }()
     
-   
-    private var uploads = [UploadOperation]() {
-        didSet {
-            let label = "Uploading \(self.currentUploadIndex + 1) of \(self.uploads.count) Live Photos."
-            self.uploadController.progressLabel.text = label
-        }
-    }
-    
-    private var currentUploadIndex: Int = 0 {
-        didSet {
-            let label = "Uploading \(self.currentUploadIndex + 1) of \(self.uploads.count) Live Photos."
-            self.uploadController.progressLabel.text = label
-        }
-    }
-    
-    private lazy var queue: OperationQueue = {
-        let queue = OperationQueue()
-        queue.maxConcurrentOperationCount = 1
-        return queue
+    private lazy var timelineViewController: TimelineViewController = {
+        let viewController = TimelineViewController()
+        viewController.delegate = self
+        return viewController
     }()
+    
+    fileprivate var playbackViewController: PlaybackViewController? = nil
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
     
     func start() {
-        selectionCoordinator.start()
-        navigationController.isNavigationBarHidden = true
-        navigationController.setViewControllers([uploadController], animated: false)
+        addChildViewController(livePhotoViewController, to: viewController)
+        addChildViewController(timelineViewController, to: viewController)
+       
+        livePhotoViewController.view.snp.makeConstraints { make in
+            make.top.bottom.leading.trailing.equalTo(viewController.view)
+        }
         
-        state = .selecting
+        timelineViewController.view.snp.makeConstraints { make in
+            make.leading.trailing.equalTo(viewController.view)
+            make.height.equalTo(60.0)
+            self.timelineConstraint = make.bottom.equalTo(viewController.view).offset(60.0).constraint
+        }
+        
+        navigationController.isNavigationBarHidden = true
+        navigationController.setViewControllers([viewController], animated: false)
     }
     
-    func upload() {
-        let operation = UploadOperation(start: { (operation) in
-            DispatchQueue.main.async {
-                guard let index = self.uploads.index(of: operation) else {
-                    return
-                }
-               
-                self.currentUploadIndex = index
-                self.uploadController.progressView.progress = 0
-            }
-        }) { (progress) in
-            DispatchQueue.main.async {
-                let percent = Float(progress.fractionCompleted)
-                self.uploadController.progressView.progress = percent
-            }
-        }
-        operation.completionBlock = {
-            DispatchQueue.main.async {
-                
-                guard self.queue.operationCount == 0 else { return }
-                
-                self.uploads.removeAll()
-                self.uploadController.hide()
-            }
-        }
-       
-        uploads.append(operation)
-        queue.addOperation(operation)
-        uploadController.show()
+    fileprivate func showTimeline() {
+        UIView.animate(
+            withDuration: 0.1,
+            delay: 0.0,
+            options: .curveEaseIn,
+            animations: {
+            self.timelineConstraint?.update(offset: 0.0)
+            self.viewController.view.layoutIfNeeded()
+        }, completion: nil)
     }
+    
+    fileprivate func hideTimeline() {
+        UIView.animate(
+            withDuration: 0.1,
+            delay: 0.0,
+            options: .curveEaseOut,
+            animations: {
+            self.timelineConstraint?.update(offset: 60.0)
+            self.viewController.view.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
+    fileprivate func reset(at indexPath: IndexPath?) {
+        guard let indexPath = indexPath else { return }
+        let collectionView = self.livePhotoViewController.collectionView
+        let cell = collectionView.cellForItem(at: indexPath) as? VideoCell
+        
+        cell?.stop()
+    }
+    
+    fileprivate func play(at indexPath: IndexPath?) {
+        guard let indexPath = indexPath else { return }
+        
+        print("play \(indexPath.item)")
+        
+        livePhotoManager.video(at: indexPath) { (asset) in
+            guard let asset = asset else { return }
+           
+            asset.loadValuesAsynchronously(
+                forKeys: ["playable"],
+                completionHandler: {
+                    guard asset.isPlayable else { return }
+                    let item = AVPlayerItem(asset: asset)
+                    
+                    DispatchQueue.main.async {
+                        let collectionView = self.livePhotoViewController.collectionView
+                        let cell = collectionView.cellForItem(at: indexPath) as? VideoCell
+                        cell?.play(item: item)
+                    }
+            })
+        }
+    }
+}
+
+extension AppCoordinator: LivePhotoViewControllerDelegate {
+    func play(indexPath: IndexPath?) {
+        guard indexPath != self.activeIndexPath else { return }
+        
+        self.reset(at: self.activeIndexPath)
+        self.activeIndexPath = indexPath
+        self.play(at: indexPath)
+    }
+    
+    func select(indexPath: IndexPath) {
+        let wasVisible = !selectedIndexPaths.isEmpty
+        
+        if !selectedIndexPaths.contains(indexPath) {
+            selectedIndexPaths.append(indexPath)
+            
+            if !wasVisible {
+                showTimeline()
+            }
+        }
+        
+        print(selectedIndexPaths)
+    }
+    
+    func deselect(indexPath: IndexPath) {
+        if let index = selectedIndexPaths.index(of: indexPath) {
+            selectedIndexPaths.remove(at: index)
+            
+            let isVisible = !selectedIndexPaths.isEmpty
+            
+            if !isVisible {
+                hideTimeline()
+            }
+        }
+        
+        print(selectedIndexPaths)
+    }
+}
+
+extension AppCoordinator: TimelineViewControllerDelegate {
+    func submitTimeline() {
+        if let _ = playbackViewController {
+            livePhotoViewController.dismiss(animated: true, completion: {
+                self.playbackViewController = nil
+            })
+        } else {
+            let viewController = PlaybackViewController()
+            viewController.modalPresentationStyle = .overCurrentContext
+            viewController.view.backgroundColor = .blue
+           
+            livePhotoViewController.present(viewController, animated: true, completion: nil)
+            
+            playbackViewController = viewController
+        }
+    }
+}
+
+func addChildViewController(_ child: UIViewController, to parent: UIViewController) {
+    parent.addChildViewController(child)
+    parent.view.addSubview(child.view)
+    child.didMove(toParentViewController: parent)
 }

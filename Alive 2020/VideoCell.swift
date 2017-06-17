@@ -17,7 +17,6 @@ class VideoCell: UICollectionViewCell {
     
     lazy var playerView: AVPlayerView = {
         let playerView = AVPlayerView()
-        playerView.translatesAutoresizingMaskIntoConstraints = false
         playerView.playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
         playerView.player = self.player
         
@@ -26,7 +25,6 @@ class VideoCell: UICollectionViewCell {
     
     lazy var imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         
@@ -76,7 +74,10 @@ class VideoCell: UICollectionViewCell {
     }
     
     func play(item: AVPlayerItem) {
-//        player.pause()
+        if item.status != .readyToPlay {
+            print("uhhhh: \(item.status.rawValue)")
+        }
+        
         playing = true
         player.replaceCurrentItem(with: item)
         player.play()

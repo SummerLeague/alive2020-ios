@@ -1,5 +1,5 @@
 //
-//  LivePhotoDataSource.swift
+//  LivePhotoManager.swift
 //  Alive 2020
 //
 //  Created by Mark Stultz on 4/20/17.
@@ -9,12 +9,12 @@
 import UIKit
 import Photos
 
-class LivePhotoDataSource: NSObject {
-    let imageManager = PHImageManager.default()
-    let cachingImageManager = PHCachingImageManager()
-    let resourceManager = PHAssetResourceManager.default()
+class LivePhotoManager: NSObject {
+    fileprivate let imageManager = PHImageManager.default()
+    fileprivate let cachingImageManager = PHCachingImageManager()
+    fileprivate let resourceManager = PHAssetResourceManager.default()
    
-    let queue: OperationQueue = {
+    fileprivate let queue: OperationQueue = {
         let queue = OperationQueue()
         queue.qualityOfService = .userInteractive
         queue.maxConcurrentOperationCount = 1
@@ -39,24 +39,6 @@ class LivePhotoDataSource: NSObject {
         super.init()
     }
 
-    func thumbnail(at indexPath: IndexPath, completion: @escaping (UIImage?) -> ()) -> PHImageRequestID {
-        let asset = assets[indexPath.item]
-        let size = CGSize(width: 512, height: 512)
-        let options = PHImageRequestOptions()
-        options.deliveryMode = .opportunistic
-        options.resizeMode = .fast
-        options.isSynchronous = false
-        options.isNetworkAccessAllowed = true
-        
-        return cachingImageManager.requestImage(
-            for: asset,
-            targetSize: size,
-            contentMode: .aspectFill,
-            options: options) { (image, info) in
-            completion(image)
-        }
-    }
-    
     func video(at indexPath: IndexPath, completion: @escaping (AVURLAsset?) -> ()) {
         let asset = self.assets[indexPath.item]
         let operation = LoadOperation(
@@ -89,20 +71,27 @@ class LivePhotoDataSource: NSObject {
     }
 }
 
-extension LivePhotoDataSource: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+extension LivePhotoManager: LivePhotoDataSource {
+    var assetCount: Int {
         return assets.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: "cell",
-            for: indexPath)
-        let videoCell = cell as? VideoCell
-        let _ = thumbnail(at: indexPath) { (image) in
-            videoCell?.imageView.image = image
+    func thumbnail(at indexPath: IndexPath, completion: @escaping (UIImage?) -> ()) -> PHImageRequestID {
+        let asset = assets[indexPath.item]
+        let size = CGSize(width: 512, height: 512)
+        let options = PHImageRequestOptions()
+        options.deliveryMode = .opportunistic
+        options.resizeMode = .fast
+        options.isSynchronous = false
+        options.isNetworkAccessAllowed = true
+        
+        return cachingImageManager.requestImage(
+            for: asset,
+            targetSize: size,
+            contentMode: .aspectFill,
+            options: options) { (image, info) in
+            completion(image)
         }
-        return cell
     }
 }
 
