@@ -14,7 +14,7 @@ struct User {
     let email: String
     let authToken: String
     
-    init?(json: JSONDictionary) {
+    init?(json: JsonDictionary) {
         guard let id = json["id"] as? Int else { return nil }
         guard let username = json["username"] as? String else { return nil }
         guard let email = json["email"] as? String else { return nil }

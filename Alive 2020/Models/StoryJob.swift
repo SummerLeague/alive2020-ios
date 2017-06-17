@@ -11,7 +11,7 @@ import Foundation
 struct StoryJob {
     let referenceId: String
     
-    init?(json: JSONDictionary) {
+    init?(json: JsonDictionary) {
         guard let referenceId = json["referenceId"] as? String else { return nil }
         
         self.referenceId = referenceId
