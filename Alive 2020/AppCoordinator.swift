@@ -93,8 +93,6 @@ class AppCoordinator: NSObject {
     fileprivate func play(at indexPath: IndexPath?) {
         guard let indexPath = indexPath else { return }
         
-        print("play \(indexPath.item)")
-       
         livePhotoManager.cancelAllRequests()
         livePhotoManager.video(at: indexPath) { (asset) in
             guard let asset = asset else { return }

@@ -66,9 +66,6 @@ class LoadOperation: Operation {
             return
         }
        
-        let options = PHAssetResourceRequestOptions()
-        options.isNetworkAccessAllowed = true
-        
         // get paired video for asset
         let resources = PHAssetResource.assetResources(for: asset)
         let pairedVideos = resources.filter({$0.type == .pairedVideo})
@@ -77,6 +74,9 @@ class LoadOperation: Operation {
             state = .finished
             return
         }
+        
+        let options = PHAssetResourceRequestOptions()
+        options.isNetworkAccessAllowed = true
         
         let name = "\(UUID().uuidString).mov"
         let path = "\(NSTemporaryDirectory())\(name)"

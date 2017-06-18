@@ -31,6 +31,7 @@ class Composition {
     }
    
     func add(asset: AVURLAsset) {
+        print(asset.url)
         let audioTracks = asset.tracks(withMediaType: AVMediaTypeAudio)
         let videoTracks = asset.tracks(withMediaType: AVMediaTypeVideo)
         guard let assetAudioTrack = audioTracks.first else { return }
@@ -61,6 +62,7 @@ class Composition {
             asset: asset,
             timeRange: timeRange,
             naturalSize: assetVideoTrack.naturalSize,
+            preferredTransform: assetVideoTrack.preferredTransform,
             audioTrack: audioTrack,
             videoTrack: videoTrack)
         

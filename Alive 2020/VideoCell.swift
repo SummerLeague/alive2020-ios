@@ -73,10 +73,6 @@ class VideoCell: UICollectionViewCell {
     }
     
     func play(item: AVPlayerItem) {
-        if item.status != .readyToPlay {
-            print("uhhhh: \(item.status.rawValue)")
-        }
-        
         playing = true
         player.replaceCurrentItem(with: item)
         player.play()

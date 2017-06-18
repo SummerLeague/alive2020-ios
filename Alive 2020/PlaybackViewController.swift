@@ -14,7 +14,7 @@ class PlaybackViewController: UIViewController {
     
     private lazy var playerView: AVPlayerView = {
         let playerView = AVPlayerView()
-        playerView.playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
+        playerView.playerLayer.videoGravity = AVLayerVideoGravityResizeAspect
         playerView.player = self.player
         
         return playerView
