@@ -12,10 +12,10 @@ import SnapKit
 
 class AppCoordinator: NSObject {
     private let navigationController: UINavigationController
-    private let livePhotoManager = LivePhotoManager()
     private let viewController = UIViewController()
     private var timelineConstraint: Constraint? = nil
     
+    fileprivate let livePhotoManager = LivePhotoManager()
     fileprivate var activeIndexPath: IndexPath? = nil
     fileprivate var selectedIndexPaths = [IndexPath]()
     
@@ -94,7 +94,8 @@ class AppCoordinator: NSObject {
         guard let indexPath = indexPath else { return }
         
         print("play \(indexPath.item)")
-        
+       
+        livePhotoManager.cancelAllRequests()
         livePhotoManager.video(at: indexPath) { (asset) in
             guard let asset = asset else { return }
            
@@ -159,9 +160,35 @@ extension AppCoordinator: TimelineViewControllerDelegate {
                 self.playbackViewController = nil
             })
         } else {
+            let group = DispatchGroup()
+            var assets = [AVURLAsset]()
+            
+            for indexPath in selectedIndexPaths {
+                group.enter()
+               
+                livePhotoManager.video(at: indexPath, completion: { asset in
+                    if let asset = asset {
+                        assets.append(asset)
+                    }
+                    
+                    group.leave()
+                })
+            }
+            
+            group.wait()
+          
+            let composition = Composition()
+            
+            for asset in assets {
+                composition.add(asset: asset)
+            }
+            
+            let playerItem = AVPlayerItem(asset: composition.composition)
+            playerItem.videoComposition = composition.videoComposition
+            
             let viewController = PlaybackViewController()
             viewController.modalPresentationStyle = .overCurrentContext
-            viewController.view.backgroundColor = .blue
+            viewController.player.replaceCurrentItem(with: playerItem)
            
             livePhotoViewController.present(viewController, animated: true, completion: nil)
             

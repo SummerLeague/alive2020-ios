@@ -38,6 +38,10 @@ class LivePhotoManager: NSObject {
         assets = fetchLivePhotos()
         super.init()
     }
+    
+    func cancelAllRequests() {
+        queue.cancelAllOperations()
+    }
 
     func video(at indexPath: IndexPath, completion: @escaping (AVURLAsset?) -> ()) {
         let asset = self.assets[indexPath.item]
@@ -49,7 +53,6 @@ class LivePhotoManager: NSObject {
             completion(weakOp?.outputAsset)
         }
         
-        queue.cancelAllOperations()
         queue.addOperation(operation)
     }
    

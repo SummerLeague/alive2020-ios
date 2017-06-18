@@ -12,7 +12,6 @@ import AVFoundation
 class VideoCell: UICollectionViewCell {
     
     private let player = AVPlayer()
-    private var looper: AVPlayerLooper? = nil
     private var playing = false
     
     lazy var playerView: AVPlayerView = {
