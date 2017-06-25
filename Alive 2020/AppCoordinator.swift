@@ -182,7 +182,12 @@ extension AppCoordinator: TimelineViewControllerDelegate {
             }
             
             let playerItem = AVPlayerItem(asset: composition.composition)
-            playerItem.videoComposition = composition.videoComposition
+            playerItem.videoComposition = AVMutableVideoComposition(
+                clips: composition.clips,
+                size: CGSize(width: 1440.0, height: 1080.0),
+//                crop: .portrait)
+//                crop: .landscape)
+                crop: .square)
             
             let viewController = PlaybackViewController()
             viewController.modalPresentationStyle = .overCurrentContext

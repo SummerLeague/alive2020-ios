@@ -18,38 +18,70 @@ struct Clip {
     let videoTrack: AVMutableCompositionTrack
 }
 
-extension CGFloat {
-    public static var deg2rad: CGFloat { return pi / 180 }
-    public static var rad2deg: CGFloat { return 180 / pi }
+extension Clip {
+    func crop() -> Crop {
+        let isLandscape = preferredTransform.degrees() == 0.0
+        return isLandscape ? Crop.landscape : Crop.portrait
+    }
+    
+    func croppedSize() -> CGSize {
+        return crop().croppedSize(naturalSize)
+    }
+    
+    func scale(crop targetCrop: Crop) -> CGPoint {
+        let sourceSize = croppedSize()
+        let targetSize = targetCrop.croppedSize(videoTrack.naturalSize)
+       
+        let scale = targetCrop == .landscape
+            ? (targetSize.height / sourceSize.height)
+            : (targetSize.width / sourceSize.width)
+
+        return CGPoint(x: scale, y: scale)
+    }
 }
 
-extension Clip {
-    func scale() -> CGAffineTransform {
-        let degrees = atan2(preferredTransform.b, preferredTransform.a) * CGFloat.rad2deg
+extension AVMutableVideoCompositionLayerInstruction {
+    convenience init(clip: Clip, size: CGSize, crop: Crop) {
+        self.init(assetTrack: clip.videoTrack)
+        let scale = clip.scale(crop: crop)
+        let clipSize = CGSize(
+            width: clip.naturalSize.width * scale.x,
+            height: clip.naturalSize.height * scale.y)
+        let xformScale = CGAffineTransform(scaleX: scale.x, y: scale.y)
+        let xformModel = CGAffineTransform(translationX: clipSize.width * -0.5, y: clipSize.height * -0.5)
+        let xformRotation = CGAffineTransform(rotationAngle: clip.preferredTransform.rotation())
+        let xformWorld = CGAffineTransform(translationX: size.width * 0.5, y: size.height * 0.5)
+        let transform = xformScale
+            .concatenating(xformModel)
+            .concatenating(xformRotation)
+            .concatenating(xformWorld)
+        setTransform(transform, at: clip.timeRange.start)
+    }
+}
 
-        if degrees == 0 {
-            return CGAffineTransform(
-                scaleX: naturalSize.width / videoTrack.naturalSize.width,
-                y: naturalSize.height / videoTrack.naturalSize.height)
-        } else {
-            return CGAffineTransform(
-                scaleX: videoTrack.naturalSize.width / naturalSize.width,
-                y: videoTrack.naturalSize.height / naturalSize.height)
+extension AVMutableVideoCompositionInstruction {
+    convenience init(clip: Clip, size: CGSize, crop: Crop) {
+        self.init()
+        timeRange = clip.timeRange
+        layerInstructions = [
+            AVMutableVideoCompositionLayerInstruction(
+                clip: clip,
+                size: size,
+                crop: crop)
+        ]
+    }
+}
+
+extension AVMutableVideoComposition {
+    convenience init(clips: [Clip], size: CGSize, crop: Crop) {
+        self.init()
+        renderSize = crop.croppedSize(size)
+        frameDuration = CMTimeMake(1, 30)
+        instructions = clips.flatMap {
+            AVMutableVideoCompositionInstruction(
+                clip: $0,
+                size:renderSize,
+                crop: crop)
         }
     }
-    
-    func layerInstruction() -> AVMutableVideoCompositionLayerInstruction {
-        let transform = scale().concatenating(preferredTransform)
-        let layerInstruction = AVMutableVideoCompositionLayerInstruction(assetTrack: self.videoTrack)
-        layerInstruction.setTransform(transform, at: self.timeRange.start)
-        return layerInstruction
-    }
-    
-    func instruction() -> AVMutableVideoCompositionInstruction {
-        let instruction = AVMutableVideoCompositionInstruction()
-        instruction.timeRange = self.timeRange
-        instruction.layerInstructions = [layerInstruction()]
-        
-        return instruction
-    }
-}   
+}

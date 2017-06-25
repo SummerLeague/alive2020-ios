@@ -9,29 +9,30 @@
 import Foundation
 import AVFoundation
 
-class Composition {
-    private var clips = [Clip]()
-    public private(set) var composition = AVMutableComposition()
-   
-    var clipCount: Int { return clips.count }
-    var videoComposition: AVVideoComposition {
-        let portrait = CGSize(width: 1080.0, height: 1440.0)
+enum Crop {
+    case portrait
+    case landscape
+    case square
+}
 
-        let videoComposition = AVMutableVideoComposition()
-        videoComposition.renderSize = portrait
-        videoComposition.frameDuration = CMTimeMake(1, 30)
-        videoComposition.instructions = self.clips.flatMap({$0.instruction()})
+extension Crop {
+    func croppedSize(_ size: CGSize) -> CGSize {
+        let minSize = min(size.width, size.height)
+        let maxSize = max(size.width, size.height)
         
-        return videoComposition
+        switch self {
+        case .portrait: return CGSize(width: minSize, height: maxSize)
+        case .landscape: return CGSize(width: maxSize, height: minSize)
+        case .square: return CGSize(width: minSize, height: minSize)
+        }
     }
-   
-    func clip(at indexPath: IndexPath) -> Clip? {
-        guard indexPath.item < clips.count else { return nil }
-        return clips[indexPath.item]
-    }
-   
-    func add(asset: AVURLAsset) {
-        print(asset.url)
+}
+
+class Composition {
+    public private(set) var clips = [Clip]()
+    public let composition = AVMutableComposition()
+    
+    public func add(asset: AVURLAsset) {
         let audioTracks = asset.tracks(withMediaType: AVMediaTypeAudio)
         let videoTracks = asset.tracks(withMediaType: AVMediaTypeVideo)
         guard let assetAudioTrack = audioTracks.first else { return }

@@ -12,6 +12,7 @@
 		D80DF5A11EDE2D2400A838CD /* Clip.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80DF5A01EDE2D2400A838CD /* Clip.swift */; };
 		D81119401EF4EC98006F22AC /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811193F1EF4EC98006F22AC /* TimelineViewController.swift */; };
 		D81119421EF5B720006F22AC /* PlaybackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81119411EF5B720006F22AC /* PlaybackViewController.swift */; };
+		D811911A1EFFE8FD003EDD29 /* CoreGraphics+Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81191191EFFE8FD003EDD29 /* CoreGraphics+Utility.swift */; };
 		D81460471EA9B18E00BA9D6C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81460461EA9B18E00BA9D6C /* AppDelegate.swift */; };
 		D814604E1EA9B18E00BA9D6C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D814604D1EA9B18E00BA9D6C /* Assets.xcassets */; };
 		D81460511EA9B18E00BA9D6C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D814604F1EA9B18E00BA9D6C /* LaunchScreen.storyboard */; };
@@ -55,6 +56,7 @@
 		D80DF5A01EDE2D2400A838CD /* Clip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Clip.swift; sourceTree = "<group>"; };
 		D811193F1EF4EC98006F22AC /* TimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineViewController.swift; sourceTree = "<group>"; };
 		D81119411EF5B720006F22AC /* PlaybackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackViewController.swift; sourceTree = "<group>"; };
+		D81191191EFFE8FD003EDD29 /* CoreGraphics+Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoreGraphics+Utility.swift"; sourceTree = "<group>"; };
 		D81460431EA9B18E00BA9D6C /* Alive 2020.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Alive 2020.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D81460461EA9B18E00BA9D6C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D814604D1EA9B18E00BA9D6C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				D89C1E111EB0387000644CE3 /* AVPlayerView.swift */,
 				D80DF5A01EDE2D2400A838CD /* Clip.swift */,
 				D80DF59E1EDD150D00A838CD /* Composition.swift */,
+				D81191191EFFE8FD003EDD29 /* CoreGraphics+Utility.swift */,
 				D89C1E0F1EB030EA00644CE3 /* ImageCell.swift */,
 				D81460791EA9B66500BA9D6C /* LivePhotoManager.swift */,
 				D81460771EA9B4ED00BA9D6C /* LivePhotoViewController.swift */,
@@ -388,6 +391,7 @@
 			files = (
 				D80DF59F1EDD150D00A838CD /* Composition.swift in Sources */,
 				D80DF5A11EDE2D2400A838CD /* Clip.swift in Sources */,
+				D811911A1EFFE8FD003EDD29 /* CoreGraphics+Utility.swift in Sources */,
 				D81460751EA9B44300BA9D6C /* AppCoordinator.swift in Sources */,
 				D8F0737F1EC8AE0D00E5B0B1 /* User.swift in Sources */,
 				D8F073871EC8B20A00E5B0B1 /* Api.swift in Sources */,
