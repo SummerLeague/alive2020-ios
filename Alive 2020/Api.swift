@@ -84,7 +84,40 @@ extension Api {
 
 class Service {
     let session = URLSession.shared
- 
+
+    func create(username: String, email: String, password: String, completion: ((User?) -> ())?) {
+        let api = Api.create(
+            username: username,
+            email: email,
+            password: password)
+        guard let request = api.request() else { return }
+        
+        let task = session.dataTask(with: request) { (data, response, error) in
+            if let response = response as? HTTPURLResponse {
+                switch HttpResponse(rawValue: response.statusCode) {
+                case .success?: print("success")
+                case .unauthorized?: print("unauthorized")
+                case .unprocessable?: print("unprocessable")
+                    /*data -> "message" */
+                case nil: print("Unknown \(response.statusCode)")
+                }
+            }
+            
+            var user: User? = nil
+          
+            if let data = data,
+                let json = try? JSONSerialization.jsonObject(with: data, options: []),
+                let jsonDict = json as? JsonDictionary,
+                let userDict = jsonDict["user"] as? JsonDictionary {
+                user = User(json: userDict)
+            }
+            
+            completion?(user)
+        }
+        
+        task.resume()
+    }
+    
     func login(username: String, password: String, completion: ((User?) -> ())?) {
         let api = Api.login(username: username, password: password)
         guard let request = api.request() else { return }

@@ -18,6 +18,21 @@ class Alive_2020Tests: XCTestCase {
     override func tearDown() {
         super.tearDown()
     }
+   
+//    func testCreate() {
+//        let create = expectation(description: "create")
+//        
+//        let service = Service()
+//        service.create(
+//            username: "username",
+//            email: "email",
+//            password: "password" { user in
+//                print("Success: \(user)")
+//                create.fulfill()
+//        }
+//        
+//        waitForExpectations(timeout: 10.0, handler: nil)
+//    }
     
     func testLogin() {
         let login = expectation(description: "login")
