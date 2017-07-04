@@ -17,8 +17,12 @@ enum HttpResponse: Int {
 }
 
 enum Api {
+    // Users
     case create(username: String, email: String, password: String)
     case login(username: String, password: String)
+    
+    // Stories
+    case primaryStory(userId: UInt)
     case createStoryJob()
 }
 
@@ -27,6 +31,7 @@ extension Api {
         switch self {
         case .create(_, _, _): return "users"
         case .login(_, _): return "login"
+        case .primaryStory(let userId): return "users/\(userId)/stories/primary_story"
         case .createStoryJob: return "story_jobs"
         }
     }
@@ -35,6 +40,7 @@ extension Api {
         switch self {
         case .create(_, _, _): return "POST"
         case .login(_, _): return "POST"
+        case .primaryStory(_): return "GET"
         case .createStoryJob: return "POST"
         }
     }
@@ -143,6 +149,36 @@ class Service {
             }
             
             completion?(user)
+        }
+        
+        task.resume()
+    }
+    
+    func primaryStory(userId: UInt, completion: ((Story?) -> ())?) {
+        let api = Api.primaryStory(userId: userId)
+        guard let request = api.request() else { return }
+       
+        let task = session.dataTask(with: request) { (data, response, error) in
+            if let response = response as? HTTPURLResponse {
+                switch HttpResponse(rawValue: response.statusCode) {
+                case .success?: print("success")
+                case .unauthorized?: print("unauthorized")
+                case .unprocessable?: print("unprocessable")
+                    /*data -> "message" */
+                case nil: print("Unknown \(response.statusCode)")
+                }
+            }
+            
+            var story: Story? = nil
+
+            if let data = data,
+                let json = try? JSONSerialization.jsonObject(with: data, options: []),
+                let jsonDict = json as? JsonDictionary,
+                let storyDict = jsonDict["story"] as? JsonDictionary {
+                story = Story(json: storyDict)
+            }
+            
+            completion?(story)
         }
         
         task.resume()

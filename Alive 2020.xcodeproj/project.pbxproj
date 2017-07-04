@@ -23,6 +23,8 @@
 		D814607A1EA9B66500BA9D6C /* LivePhotoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81460791EA9B66500BA9D6C /* LivePhotoManager.swift */; };
 		D81460821EA9CD2100BA9D6C /* UploadController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81460811EA9CD2100BA9D6C /* UploadController.swift */; };
 		D81460861EAD441300BA9D6C /* UploadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81460851EAD441300BA9D6C /* UploadOperation.swift */; };
+		D89144F41F0AD5BD0059BEC3 /* Story.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89144F31F0AD5BD0059BEC3 /* Story.swift */; };
+		D89144F61F0AD6CF0059BEC3 /* StoryMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89144F51F0AD6CF0059BEC3 /* StoryMedia.swift */; };
 		D89C1E101EB030EA00644CE3 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89C1E0F1EB030EA00644CE3 /* ImageCell.swift */; };
 		D89C1E121EB0387000644CE3 /* AVPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89C1E111EB0387000644CE3 /* AVPlayerView.swift */; };
 		D89C1E141EB048AC00644CE3 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89C1E131EB048AC00644CE3 /* VideoCell.swift */; };
@@ -73,6 +75,8 @@
 		D81460791EA9B66500BA9D6C /* LivePhotoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LivePhotoManager.swift; sourceTree = "<group>"; };
 		D81460811EA9CD2100BA9D6C /* UploadController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadController.swift; sourceTree = "<group>"; };
 		D81460851EAD441300BA9D6C /* UploadOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadOperation.swift; sourceTree = "<group>"; };
+		D89144F31F0AD5BD0059BEC3 /* Story.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Story.swift; sourceTree = "<group>"; };
+		D89144F51F0AD6CF0059BEC3 /* StoryMedia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryMedia.swift; sourceTree = "<group>"; };
 		D89C1E0F1EB030EA00644CE3 /* ImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		D89C1E111EB0387000644CE3 /* AVPlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVPlayerView.swift; sourceTree = "<group>"; };
 		D89C1E131EB048AC00644CE3 /* VideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
@@ -192,7 +196,9 @@
 				D81460771EA9B4ED00BA9D6C /* LivePhotoViewController.swift */,
 				D8F2ACDD1EBAD6E100BFA4B9 /* LoadOperation.swift */,
 				D81119411EF5B720006F22AC /* PlaybackViewController.swift */,
+				D89144F31F0AD5BD0059BEC3 /* Story.swift */,
 				D8F073801EC8AFB700E5B0B1 /* StoryJob.swift */,
+				D89144F51F0AD6CF0059BEC3 /* StoryMedia.swift */,
 				D811193F1EF4EC98006F22AC /* TimelineViewController.swift */,
 				D81460811EA9CD2100BA9D6C /* UploadController.swift */,
 				D81460851EAD441300BA9D6C /* UploadOperation.swift */,
@@ -391,11 +397,13 @@
 			files = (
 				D80DF59F1EDD150D00A838CD /* Composition.swift in Sources */,
 				D80DF5A11EDE2D2400A838CD /* Clip.swift in Sources */,
+				D89144F41F0AD5BD0059BEC3 /* Story.swift in Sources */,
 				D811911A1EFFE8FD003EDD29 /* CoreGraphics+Utility.swift in Sources */,
 				D81460751EA9B44300BA9D6C /* AppCoordinator.swift in Sources */,
 				D8F0737F1EC8AE0D00E5B0B1 /* User.swift in Sources */,
 				D8F073871EC8B20A00E5B0B1 /* Api.swift in Sources */,
 				D81119401EF4EC98006F22AC /* TimelineViewController.swift in Sources */,
+				D89144F61F0AD6CF0059BEC3 /* StoryMedia.swift in Sources */,
 				D8F2ACDE1EBAD6E100BFA4B9 /* LoadOperation.swift in Sources */,
 				D81460861EAD441300BA9D6C /* UploadOperation.swift in Sources */,
 				D814607A1EA9B66500BA9D6C /* LivePhotoManager.swift in Sources */,

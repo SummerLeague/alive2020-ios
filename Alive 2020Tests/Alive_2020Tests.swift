@@ -38,8 +38,20 @@ class Alive_2020Tests: XCTestCase {
         let login = expectation(description: "login")
         
         let service = Service()
-        service.login(username: "bradley", password: "testing") { user in
+        service.login(username: "mstultz", password: "al1v3-2020") { user in
             login.fulfill()
+        }
+        
+        waitForExpectations(timeout: 10.0, handler: nil)
+    }
+    
+    func testPrimaryStory() {
+        let primaryStory = expectation(description: "primaryStory")
+        
+        let service = Service()
+        service.primaryStory(userId: 1) { story in
+            guard story != nil else { return XCTFail() }
+            primaryStory.fulfill()
         }
         
         waitForExpectations(timeout: 10.0, handler: nil)
