@@ -90,7 +90,9 @@ extension Api {
 
 class Service {
     let session = URLSession.shared
-
+    
+    public var authorization: String? = nil
+   
     func create(username: String, email: String, password: String, completion: ((User?) -> ())?) {
         let api = Api.create(
             username: username,
@@ -182,5 +184,47 @@ class Service {
         }
         
         task.resume()
+    }
+    
+    func createStoryJob(completion: ((StoryJob?, AwsCredentials?) ->())?) {
+        let api = Api.createStoryJob()
+        guard var request = api.request() else { return }
+        request.authorize(authorization: authorization)
+       
+        let task = session.dataTask(with: request) { (data, response, error) in
+            if let response = response as? HTTPURLResponse {
+                switch HttpResponse(rawValue: response.statusCode) {
+                case .success?: print("success")
+                case .unauthorized?: print("unauthorized")
+                case .unprocessable?: print("unprocessable")
+                    /*data -> "message" */
+                case nil: print("Unknown \(response.statusCode)")
+                }
+            }
+            
+            var storyJob: StoryJob? = nil
+            var credentials: AwsCredentials? = nil
+
+            if let data = data,
+                let json = try? JSONSerialization.jsonObject(with: data, options: []),
+                let jsonDict = json as? JsonDictionary,
+                let storyJobDict = jsonDict["storyJob"] as? JsonDictionary,
+                let awsDict = jsonDict["aws"] as? JsonDictionary,
+                let credentialsDict = awsDict["credentials"] as? JsonDictionary {
+                storyJob = StoryJob(json: storyJobDict)
+                credentials = AwsCredentials(json: credentialsDict)
+            }
+            
+            completion?(storyJob, credentials)
+        }
+        
+        task.resume()
+    }
+}
+
+extension URLRequest {
+    mutating func authorize(authorization: String?) {
+        guard let authorization = authorization else { return }
+        setValue("JWT \(authorization)", forHTTPHeaderField: "Authorization")
     }
 }
