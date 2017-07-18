@@ -10,8 +10,6 @@
 		5F7CDEE00C05F1358A25C984 /* Pods_Alive_2020.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6D12F33A614AC83EDEA4B80 /* Pods_Alive_2020.framework */; };
 		D80DF59F1EDD150D00A838CD /* Composition.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80DF59E1EDD150D00A838CD /* Composition.swift */; };
 		D80DF5A11EDE2D2400A838CD /* Clip.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80DF5A01EDE2D2400A838CD /* Clip.swift */; };
-		D81119401EF4EC98006F22AC /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D811193F1EF4EC98006F22AC /* TimelineViewController.swift */; };
-		D81119421EF5B720006F22AC /* PlaybackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81119411EF5B720006F22AC /* PlaybackViewController.swift */; };
 		D811911A1EFFE8FD003EDD29 /* CoreGraphics+Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81191191EFFE8FD003EDD29 /* CoreGraphics+Utility.swift */; };
 		D81460471EA9B18E00BA9D6C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81460461EA9B18E00BA9D6C /* AppDelegate.swift */; };
 		D814604E1EA9B18E00BA9D6C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D814604D1EA9B18E00BA9D6C /* Assets.xcassets */; };
@@ -19,20 +17,23 @@
 		D814605C1EA9B18E00BA9D6C /* Alive_2020Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D814605B1EA9B18E00BA9D6C /* Alive_2020Tests.swift */; };
 		D81460671EA9B18E00BA9D6C /* Alive_2020UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81460661EA9B18E00BA9D6C /* Alive_2020UITests.swift */; };
 		D81460751EA9B44300BA9D6C /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81460741EA9B44300BA9D6C /* AppCoordinator.swift */; };
-		D81460781EA9B4ED00BA9D6C /* LivePhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81460771EA9B4ED00BA9D6C /* LivePhotoViewController.swift */; };
-		D814607A1EA9B66500BA9D6C /* LivePhotoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81460791EA9B66500BA9D6C /* LivePhotoManager.swift */; };
-		D81460821EA9CD2100BA9D6C /* UploadController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81460811EA9CD2100BA9D6C /* UploadController.swift */; };
-		D81460861EAD441300BA9D6C /* UploadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81460851EAD441300BA9D6C /* UploadOperation.swift */; };
 		D8898EA11F149676000493FE /* AwsCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8898EA01F149676000493FE /* AwsCredentials.swift */; };
 		D89144F41F0AD5BD0059BEC3 /* Story.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89144F31F0AD5BD0059BEC3 /* Story.swift */; };
 		D89144F61F0AD6CF0059BEC3 /* StoryMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89144F51F0AD6CF0059BEC3 /* StoryMedia.swift */; };
-		D89C1E101EB030EA00644CE3 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89C1E0F1EB030EA00644CE3 /* ImageCell.swift */; };
 		D89C1E121EB0387000644CE3 /* AVPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89C1E111EB0387000644CE3 /* AVPlayerView.swift */; };
 		D89C1E141EB048AC00644CE3 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89C1E131EB048AC00644CE3 /* VideoCell.swift */; };
+		D89DB6C71F1C0240007A8A61 /* LivePhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89DB6C61F1C0240007A8A61 /* LivePhotoViewController.swift */; };
+		D8E196C11F1C0AE6007B9146 /* LivePhotoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E196C01F1C0AE6007B9146 /* LivePhotoController.swift */; };
+		D8E196C31F1C0B72007B9146 /* PHAsset+LivePhotos.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E196C21F1C0B72007B9146 /* PHAsset+LivePhotos.swift */; };
+		D8E196C91F1D623A007B9146 /* LivePhotoStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E196C81F1D623A007B9146 /* LivePhotoStore.swift */; };
+		D8E196CE1F1D6304007B9146 /* Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E196CD1F1D6304007B9146 /* Files.swift */; };
+		D8E196D01F1D65B0007B9146 /* UIViewController+Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E196CF1F1D65B0007B9146 /* UIViewController+Container.swift */; };
+		D8E196D21F1D74A7007B9146 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E196D11F1D74A7007B9146 /* MainViewController.swift */; };
+		D8E196D51F1D7601007B9146 /* PreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E196D41F1D7601007B9146 /* PreviewController.swift */; };
+		D8E196D81F1DBB90007B9146 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E196D71F1DBB90007B9146 /* PreviewViewController.swift */; };
 		D8F0737F1EC8AE0D00E5B0B1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F0737E1EC8AE0D00E5B0B1 /* User.swift */; };
 		D8F073811EC8AFB700E5B0B1 /* StoryJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F073801EC8AFB700E5B0B1 /* StoryJob.swift */; };
 		D8F073871EC8B20A00E5B0B1 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F073861EC8B20A00E5B0B1 /* Api.swift */; };
-		D8F2ACDE1EBAD6E100BFA4B9 /* LoadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F2ACDD1EBAD6E100BFA4B9 /* LoadOperation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,8 +58,6 @@
 		80D11F6DC69618066C15056B /* Pods-Alive 2020.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Alive 2020.release.xcconfig"; path = "Pods/Target Support Files/Pods-Alive 2020/Pods-Alive 2020.release.xcconfig"; sourceTree = "<group>"; };
 		D80DF59E1EDD150D00A838CD /* Composition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Composition.swift; sourceTree = "<group>"; };
 		D80DF5A01EDE2D2400A838CD /* Clip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Clip.swift; sourceTree = "<group>"; };
-		D811193F1EF4EC98006F22AC /* TimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineViewController.swift; sourceTree = "<group>"; };
-		D81119411EF5B720006F22AC /* PlaybackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackViewController.swift; sourceTree = "<group>"; };
 		D81191191EFFE8FD003EDD29 /* CoreGraphics+Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoreGraphics+Utility.swift"; sourceTree = "<group>"; };
 		D81460431EA9B18E00BA9D6C /* Alive 2020.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Alive 2020.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D81460461EA9B18E00BA9D6C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -72,20 +71,23 @@
 		D81460661EA9B18E00BA9D6C /* Alive_2020UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alive_2020UITests.swift; sourceTree = "<group>"; };
 		D81460681EA9B18E00BA9D6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D81460741EA9B44300BA9D6C /* AppCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
-		D81460771EA9B4ED00BA9D6C /* LivePhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LivePhotoViewController.swift; sourceTree = "<group>"; };
-		D81460791EA9B66500BA9D6C /* LivePhotoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LivePhotoManager.swift; sourceTree = "<group>"; };
-		D81460811EA9CD2100BA9D6C /* UploadController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadController.swift; sourceTree = "<group>"; };
-		D81460851EAD441300BA9D6C /* UploadOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadOperation.swift; sourceTree = "<group>"; };
 		D8898EA01F149676000493FE /* AwsCredentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AwsCredentials.swift; sourceTree = "<group>"; };
 		D89144F31F0AD5BD0059BEC3 /* Story.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Story.swift; sourceTree = "<group>"; };
 		D89144F51F0AD6CF0059BEC3 /* StoryMedia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryMedia.swift; sourceTree = "<group>"; };
-		D89C1E0F1EB030EA00644CE3 /* ImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		D89C1E111EB0387000644CE3 /* AVPlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVPlayerView.swift; sourceTree = "<group>"; };
 		D89C1E131EB048AC00644CE3 /* VideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
+		D89DB6C61F1C0240007A8A61 /* LivePhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LivePhotoViewController.swift; sourceTree = "<group>"; };
+		D8E196C01F1C0AE6007B9146 /* LivePhotoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LivePhotoController.swift; sourceTree = "<group>"; };
+		D8E196C21F1C0B72007B9146 /* PHAsset+LivePhotos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PHAsset+LivePhotos.swift"; sourceTree = "<group>"; };
+		D8E196C81F1D623A007B9146 /* LivePhotoStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LivePhotoStore.swift; sourceTree = "<group>"; };
+		D8E196CD1F1D6304007B9146 /* Files.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Files.swift; sourceTree = "<group>"; };
+		D8E196CF1F1D65B0007B9146 /* UIViewController+Container.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Container.swift"; sourceTree = "<group>"; };
+		D8E196D11F1D74A7007B9146 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		D8E196D41F1D7601007B9146 /* PreviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewController.swift; sourceTree = "<group>"; };
+		D8E196D71F1DBB90007B9146 /* PreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
 		D8F0737E1EC8AE0D00E5B0B1 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		D8F073801EC8AFB700E5B0B1 /* StoryJob.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryJob.swift; sourceTree = "<group>"; };
 		D8F073861EC8B20A00E5B0B1 /* Api.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
-		D8F2ACDD1EBAD6E100BFA4B9 /* LoadOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadOperation.swift; sourceTree = "<group>"; };
 		F6D12F33A614AC83EDEA4B80 /* Pods_Alive_2020.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Alive_2020.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -137,7 +139,6 @@
 			children = (
 				D81460451EA9B18E00BA9D6C /* Alive 2020 */,
 				D814605A1EA9B18E00BA9D6C /* Alive 2020Tests */,
-				D81460651EA9B18E00BA9D6C /* Alive 2020UITests */,
 				D81460441EA9B18E00BA9D6C /* Products */,
 				2DB1DD84439E842DFEB957C9 /* Pods */,
 				2FF0790A0D15A7BE90A44670 /* Frameworks */,
@@ -168,6 +169,7 @@
 		D814605A1EA9B18E00BA9D6C /* Alive 2020Tests */ = {
 			isa = PBXGroup;
 			children = (
+				D81460651EA9B18E00BA9D6C /* Alive 2020UITests */,
 				D814605B1EA9B18E00BA9D6C /* Alive_2020Tests.swift */,
 				D814605D1EA9B18E00BA9D6C /* Info.plist */,
 			);
@@ -180,35 +182,85 @@
 				D81460661EA9B18E00BA9D6C /* Alive_2020UITests.swift */,
 				D81460681EA9B18E00BA9D6C /* Info.plist */,
 			);
-			path = "Alive 2020UITests";
+			name = "Alive 2020UITests";
+			path = "../Alive 2020UITests";
 			sourceTree = "<group>";
 		};
 		D81460761EA9B4D100BA9D6C /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				D8F073861EC8B20A00E5B0B1 /* Api.swift */,
+				D8E196C51F1D6201007B9146 /* Categories */,
+				D8E196CA1F1D62EA007B9146 /* Core */,
+				D8E196C41F1D61F0007B9146 /* Live Photos */,
+				D8E196C61F1D6209007B9146 /* Models */,
+				D8E196D61F1D7876007B9146 /* Network */,
+				D8E196D31F1D75F7007B9146 /* Preview */,
 				D81460741EA9B44300BA9D6C /* AppCoordinator.swift */,
 				D81460461EA9B18E00BA9D6C /* AppDelegate.swift */,
-				D8898EA01F149676000493FE /* AwsCredentials.swift */,
+				D8E196D11F1D74A7007B9146 /* MainViewController.swift */,
+			);
+			name = Sources;
+			sourceTree = "<group>";
+		};
+		D8E196C41F1D61F0007B9146 /* Live Photos */ = {
+			isa = PBXGroup;
+			children = (
 				D89C1E111EB0387000644CE3 /* AVPlayerView.swift */,
-				D80DF5A01EDE2D2400A838CD /* Clip.swift */,
-				D80DF59E1EDD150D00A838CD /* Composition.swift */,
+				D8E196C01F1C0AE6007B9146 /* LivePhotoController.swift */,
+				D8E196C81F1D623A007B9146 /* LivePhotoStore.swift */,
+				D89DB6C61F1C0240007A8A61 /* LivePhotoViewController.swift */,
+				D89C1E131EB048AC00644CE3 /* VideoCell.swift */,
+			);
+			name = "Live Photos";
+			sourceTree = "<group>";
+		};
+		D8E196C51F1D6201007B9146 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
 				D81191191EFFE8FD003EDD29 /* CoreGraphics+Utility.swift */,
-				D89C1E0F1EB030EA00644CE3 /* ImageCell.swift */,
-				D81460791EA9B66500BA9D6C /* LivePhotoManager.swift */,
-				D81460771EA9B4ED00BA9D6C /* LivePhotoViewController.swift */,
-				D8F2ACDD1EBAD6E100BFA4B9 /* LoadOperation.swift */,
-				D81119411EF5B720006F22AC /* PlaybackViewController.swift */,
+				D8E196C21F1C0B72007B9146 /* PHAsset+LivePhotos.swift */,
+				D8E196CF1F1D65B0007B9146 /* UIViewController+Container.swift */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		D8E196C61F1D6209007B9146 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D8898EA01F149676000493FE /* AwsCredentials.swift */,
 				D89144F31F0AD5BD0059BEC3 /* Story.swift */,
 				D8F073801EC8AFB700E5B0B1 /* StoryJob.swift */,
 				D89144F51F0AD6CF0059BEC3 /* StoryMedia.swift */,
-				D811193F1EF4EC98006F22AC /* TimelineViewController.swift */,
-				D81460811EA9CD2100BA9D6C /* UploadController.swift */,
-				D81460851EAD441300BA9D6C /* UploadOperation.swift */,
 				D8F0737E1EC8AE0D00E5B0B1 /* User.swift */,
-				D89C1E131EB048AC00644CE3 /* VideoCell.swift */,
 			);
-			name = Sources;
+			name = Models;
+			sourceTree = "<group>";
+		};
+		D8E196CA1F1D62EA007B9146 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				D80DF5A01EDE2D2400A838CD /* Clip.swift */,
+				D80DF59E1EDD150D00A838CD /* Composition.swift */,
+				D8E196CD1F1D6304007B9146 /* Files.swift */,
+			);
+			name = Core;
+			sourceTree = "<group>";
+		};
+		D8E196D31F1D75F7007B9146 /* Preview */ = {
+			isa = PBXGroup;
+			children = (
+				D8E196D41F1D7601007B9146 /* PreviewController.swift */,
+				D8E196D71F1DBB90007B9146 /* PreviewViewController.swift */,
+			);
+			name = Preview;
+			sourceTree = "<group>";
+		};
+		D8E196D61F1D7876007B9146 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				D8F073861EC8B20A00E5B0B1 /* Api.swift */,
+			);
+			name = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -402,22 +454,23 @@
 				D80DF5A11EDE2D2400A838CD /* Clip.swift in Sources */,
 				D89144F41F0AD5BD0059BEC3 /* Story.swift in Sources */,
 				D811911A1EFFE8FD003EDD29 /* CoreGraphics+Utility.swift in Sources */,
+				D89DB6C71F1C0240007A8A61 /* LivePhotoViewController.swift in Sources */,
+				D8E196D51F1D7601007B9146 /* PreviewController.swift in Sources */,
 				D81460751EA9B44300BA9D6C /* AppCoordinator.swift in Sources */,
 				D8F0737F1EC8AE0D00E5B0B1 /* User.swift in Sources */,
+				D8E196D21F1D74A7007B9146 /* MainViewController.swift in Sources */,
 				D8F073871EC8B20A00E5B0B1 /* Api.swift in Sources */,
-				D81119401EF4EC98006F22AC /* TimelineViewController.swift in Sources */,
 				D8898EA11F149676000493FE /* AwsCredentials.swift in Sources */,
 				D89144F61F0AD6CF0059BEC3 /* StoryMedia.swift in Sources */,
-				D8F2ACDE1EBAD6E100BFA4B9 /* LoadOperation.swift in Sources */,
-				D81460861EAD441300BA9D6C /* UploadOperation.swift in Sources */,
-				D814607A1EA9B66500BA9D6C /* LivePhotoManager.swift in Sources */,
-				D81460821EA9CD2100BA9D6C /* UploadController.swift in Sources */,
+				D8E196D01F1D65B0007B9146 /* UIViewController+Container.swift in Sources */,
 				D89C1E121EB0387000644CE3 /* AVPlayerView.swift in Sources */,
 				D89C1E141EB048AC00644CE3 /* VideoCell.swift in Sources */,
-				D81460781EA9B4ED00BA9D6C /* LivePhotoViewController.swift in Sources */,
-				D89C1E101EB030EA00644CE3 /* ImageCell.swift in Sources */,
-				D81119421EF5B720006F22AC /* PlaybackViewController.swift in Sources */,
+				D8E196C91F1D623A007B9146 /* LivePhotoStore.swift in Sources */,
+				D8E196C11F1C0AE6007B9146 /* LivePhotoController.swift in Sources */,
+				D8E196CE1F1D6304007B9146 /* Files.swift in Sources */,
+				D8E196C31F1C0B72007B9146 /* PHAsset+LivePhotos.swift in Sources */,
 				D81460471EA9B18E00BA9D6C /* AppDelegate.swift in Sources */,
+				D8E196D81F1DBB90007B9146 /* PreviewViewController.swift in Sources */,
 				D8F073811EC8AFB700E5B0B1 /* StoryJob.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

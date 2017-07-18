@@ -9,199 +9,79 @@
 import UIKit
 import AVFoundation
 import SnapKit
+import AssetsLibrary
 
 class AppCoordinator: NSObject {
     private let navigationController: UINavigationController
-    private let viewController = UIViewController()
-    private var timelineConstraint: Constraint? = nil
     
-    fileprivate let livePhotoManager = LivePhotoManager()
-    fileprivate var activeIndexPath: IndexPath? = nil
-    fileprivate var selectedIndexPaths = [IndexPath]()
-    
-    fileprivate lazy var livePhotoViewController: LivePhotoViewController = {
-        let viewController = LivePhotoViewController()
-        viewController.delegate = self
-        viewController.dataSource = self.livePhotoManager
-        
-        // So we can present playback over live photos but under timeline
-        viewController.definesPresentationContext = true
-        
-        return viewController
+    fileprivate lazy var livePhotoController: LivePhotoController = {
+        return LivePhotoController(delegate: self)
     }()
     
-    private lazy var timelineViewController: TimelineViewController = {
-        let viewController = TimelineViewController()
-        viewController.delegate = self
-        return viewController
+    fileprivate lazy var previewController: PreviewController = {
+        return PreviewController(delegate: self)
     }()
     
-    fileprivate var playbackViewController: PlaybackViewController? = nil
+    fileprivate lazy var viewController: MainViewController = {
+        return MainViewController(
+            contentViewController: self.livePhotoController.viewController,
+            overlayViewController: self.previewController.viewController)
+    }()
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
     
     func start() {
-        addChildViewController(livePhotoViewController, to: viewController)
-        addChildViewController(timelineViewController, to: viewController)
-       
-        livePhotoViewController.view.snp.makeConstraints { make in
-            make.top.bottom.leading.trailing.equalTo(viewController.view)
-        }
-        
-        timelineViewController.view.snp.makeConstraints { make in
-            make.leading.trailing.equalTo(viewController.view)
-            make.height.equalTo(60.0)
-            self.timelineConstraint = make.bottom.equalTo(viewController.view).offset(60.0).constraint
-        }
-        
         navigationController.isNavigationBarHidden = true
         navigationController.setViewControllers([viewController], animated: false)
     }
-    
-    fileprivate func showTimeline() {
-        UIView.animate(
-            withDuration: 0.1,
-            delay: 0.0,
-            options: .curveEaseIn,
-            animations: {
-            self.timelineConstraint?.update(offset: 0.0)
-            self.viewController.view.layoutIfNeeded()
-        }, completion: nil)
-    }
-    
-    fileprivate func hideTimeline() {
-        UIView.animate(
-            withDuration: 0.1,
-            delay: 0.0,
-            options: .curveEaseOut,
-            animations: {
-            self.timelineConstraint?.update(offset: 60.0)
-            self.viewController.view.layoutIfNeeded()
-        }, completion: nil)
-    }
-    
-    fileprivate func reset(at indexPath: IndexPath?) {
-        guard let indexPath = indexPath else { return }
-        let collectionView = self.livePhotoViewController.collectionView
-        let cell = collectionView.cellForItem(at: indexPath) as? VideoCell
-        
-        cell?.stop()
-    }
-    
-    fileprivate func play(at indexPath: IndexPath?) {
-        guard let indexPath = indexPath else { return }
-        
-        livePhotoManager.cancelAllRequests()
-        livePhotoManager.video(at: indexPath) { (asset) in
-            guard let asset = asset else { return }
-           
-            asset.loadValuesAsynchronously(
-                forKeys: ["playable"],
-                completionHandler: {
-                    guard asset.isPlayable else { return }
-                    let item = AVPlayerItem(asset: asset)
-                    
-                    DispatchQueue.main.async {
-                        let collectionView = self.livePhotoViewController.collectionView
-                        let cell = collectionView.cellForItem(at: indexPath) as? VideoCell
-                        cell?.play(item: item)
-                    }
-            })
-        }
-    }
 }
 
-extension AppCoordinator: LivePhotoViewControllerDelegate {
-    func play(indexPath: IndexPath?) {
-        guard indexPath != self.activeIndexPath else { return }
-        
-        self.reset(at: self.activeIndexPath)
-        self.activeIndexPath = indexPath
-        self.play(at: indexPath)
-    }
-    
-    func select(indexPath: IndexPath) {
-        let wasVisible = !selectedIndexPaths.isEmpty
-        
-        if !selectedIndexPaths.contains(indexPath) {
-            selectedIndexPaths.append(indexPath)
-            
-            if !wasVisible {
-                showTimeline()
-            }
+extension AppCoordinator: LivePhotoControllerDelegate {
+    func selectedIndexPaths(_ indexPaths: [IndexPath]?) {
+        guard let indexPaths = indexPaths else {
+            viewController.hideOverlay()
+            return
         }
         
-        print(selectedIndexPaths)
-    }
-    
-    func deselect(indexPath: IndexPath) {
-        if let index = selectedIndexPaths.index(of: indexPath) {
-            selectedIndexPaths.remove(at: index)
-            
-            let isVisible = !selectedIndexPaths.isEmpty
-            
-            if !isVisible {
-                hideTimeline()
-            }
-        }
-        
-        print(selectedIndexPaths)
-    }
-}
-
-extension AppCoordinator: TimelineViewControllerDelegate {
-    func submitTimeline() {
-        if let _ = playbackViewController {
-            livePhotoViewController.dismiss(animated: true, completion: {
-                self.playbackViewController = nil
-            })
+        if indexPaths.count > 0 {
+            viewController.showOverlay()
         } else {
-            let group = DispatchGroup()
-            var assets = [AVURLAsset]()
-            
-            for indexPath in selectedIndexPaths {
-                group.enter()
-               
-                livePhotoManager.video(at: indexPath, completion: { asset in
-                    if let asset = asset {
-                        assets.append(asset)
-                    }
-                    
-                    group.leave()
-                })
-            }
-            
-            group.wait()
-          
-            let composition = Composition()
-            
-            for asset in assets {
-                composition.add(asset: asset)
-            }
-            
-            let playerItem = AVPlayerItem(asset: composition.composition)
-            playerItem.videoComposition = AVMutableVideoComposition(
-                clips: composition.clips,
-                size: CGSize(width: 1440.0, height: 1080.0),
-//                crop: .portrait)
-//                crop: .landscape)
-                crop: .square)
-            
-            let viewController = PlaybackViewController()
-            viewController.modalPresentationStyle = .overCurrentContext
-            viewController.player.replaceCurrentItem(with: playerItem)
-           
-            livePhotoViewController.present(viewController, animated: true, completion: nil)
-            
-            playbackViewController = viewController
+            viewController.hideOverlay()
         }
     }
 }
 
-func addChildViewController(_ child: UIViewController, to parent: UIViewController) {
-    parent.addChildViewController(child)
-    parent.view.addSubview(child.view)
-    child.didMove(toParentViewController: parent)
+extension AppCoordinator: PreviewControllerDelegate {
+    func submitted() {
+        guard let composition = livePhotoController.composition(),
+            let exporter = AVAssetExportSession(
+                asset: composition.composition,
+                presetName: AVAssetExportPresetHighestQuality) else {
+                    return
+        }
+       
+        let videoComposition = AVMutableVideoComposition(
+            clips: composition.clips,
+            size: CGSize(width: 1440.0, height: 1080.0),
+            crop: .portrait)
+        let url = temporaryUrl(extension: "mp4")
+        
+        exporter.outputFileType = AVFileTypeMPEG4
+        exporter.outputURL = url
+        exporter.videoComposition = videoComposition
+        exporter.exportAsynchronously {
+            print("done \(exporter.status) \(exporter.error)")
+            guard exporter.status == .completed else { return }
+            print("done: \(url)")
+            
+            let library = ALAssetsLibrary()
+            library.writeVideoAtPath(
+                toSavedPhotosAlbum: url,
+                completionBlock: { (url, error) in
+                    print("\(url), \(error)")
+            })
+        }
+    }
 }

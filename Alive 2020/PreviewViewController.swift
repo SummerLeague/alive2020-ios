@@ -1,20 +1,15 @@
 //
-//  TimelineViewController.swift
+//  PreviewViewController.swift
 //  Alive 2020
 //
-//  Created by Mark Stultz on 6/17/17.
+//  Created by Mark Stultz on 7/17/17.
 //  Copyright © 2017 Summer League. All rights reserved.
 //
 
 import UIKit
 
-protocol TimelineViewControllerDelegate: NSObjectProtocol {
-    func submitTimeline()
-}
-
-class TimelineViewController: UIViewController {
-   
-    public weak var delegate: TimelineViewControllerDelegate? = nil
+class PreviewViewController: UIViewController {
+    public var onSubmit: (() -> ())? = nil
     
     private lazy var button: UIButton = {
         let button = UIButton(type: UIButtonType.system)
@@ -38,6 +33,6 @@ class TimelineViewController: UIViewController {
     }
     
     @objc func onButton(sender: Any) {
-        delegate?.submitTimeline()
+        onSubmit?()
     }
 }
