@@ -89,13 +89,13 @@ extension LivePhotoController: CompositionExportProvider {
         }
         
         let group = DispatchGroup()
-        var assets = [AVURLAsset]()
+        var assets = [IndexPath: AVURLAsset]()
         
         for indexPath in selectedIndexPaths {
             group.enter()
             self.livePhotoStore.video(at: indexPath.item, completion: { asset in
                 if let asset = asset {
-                    assets.append(asset)
+                    assets[indexPath] = asset
                 }
                 group.leave()
             })
@@ -105,8 +105,8 @@ extension LivePhotoController: CompositionExportProvider {
       
         let composition = Composition()
         
-        for asset in assets {
-            composition.add(asset: asset)
+        selectedIndexPaths.flatMap({assets[$0]}).forEach {
+            composition.add(asset: $0)
         }
         
         return CompositionExport(

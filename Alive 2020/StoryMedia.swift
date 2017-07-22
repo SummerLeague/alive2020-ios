@@ -23,8 +23,8 @@ struct StoryMedia {
     init?(json: JsonDictionary) {
         guard let id = json.parse("id") else { return nil }
         guard let storyId = json.parse("storyId") else { return nil }
-        guard let _ = json["createdAt"] as? String else { return nil }
-        guard let _ = json["updatedAt"] as? String else { return nil }
+//        guard let createdAt = json["createdAt"] as? String else { return nil }
+//        guard let updatedAt = json["updatedAt"] as? String else { return nil }
         guard let key = json["key"] as? String else { return nil }
         guard let duration = json.parse("duration") else { return nil }
         guard let width = json.parse("width") else { return nil }

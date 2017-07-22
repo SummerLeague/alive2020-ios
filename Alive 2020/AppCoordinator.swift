@@ -7,12 +7,10 @@
 //
 
 import UIKit
-import AVFoundation
-import SnapKit
-import AssetsLibrary
 
 class AppCoordinator: NSObject {
     private let navigationController: UINavigationController
+    private let service = Service()
     
     fileprivate lazy var livePhotoController: LivePhotoController = {
         return LivePhotoController(delegate: self)
@@ -20,6 +18,7 @@ class AppCoordinator: NSObject {
     
     fileprivate lazy var previewController: PreviewController = {
         return PreviewController(
+            service: self.service,
             compositionExportProvider: self.livePhotoController)
     }()
     
@@ -33,9 +32,22 @@ class AppCoordinator: NSObject {
         self.navigationController = navigationController
     }
     
-    func start() {
+    public func start() {
+        login()
         navigationController.isNavigationBarHidden = true
         navigationController.setViewControllers([viewController], animated: false)
+    }
+    
+    private func login() {
+        service.login(
+            username: kUsername,
+            password: kPassword) { [weak self] user in
+            if let user = user {
+                self?.service.authorization = user.authToken
+            } else {
+                print("Couldn't login.")
+            }
+        }
     }
 }
 

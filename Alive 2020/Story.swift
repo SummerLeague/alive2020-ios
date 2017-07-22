@@ -8,17 +8,6 @@
 
 import Foundation
 
-extension Dictionary where Key == String, Value == Any {
-    func parse(_ key: String) -> UInt? {
-        switch self[key] {
-            case let value as NSNumber: return value.uintValue
-            case let value as String: return UInt(value)
-            case let value as Int: return UInt(value)
-            default: return nil
-        }
-    }
-}
-
 struct Story {
     let id: UInt
     let userId: UInt
@@ -33,8 +22,8 @@ struct Story {
     init?(json: JsonDictionary) {
         guard let id = json.parse("id") else { return nil }
         guard let userId = json.parse("userId") else { return nil }
-        guard let _ = json["createdAt"] as? String else { return nil }
-        guard let _ = json["updatedAt"] as? String else { return nil }
+//        guard let createdAt = json["createdAt"] as? String else { return nil }
+//        guard let updatedAt = json["updatedAt"] as? String else { return nil }
         guard let active = json["active"] as? Bool else { return nil }
         guard let primaryStory = json["primaryStory"] as? Bool else { return nil }
         guard let storyJobId = json.parse("storyJobId") else { return nil }

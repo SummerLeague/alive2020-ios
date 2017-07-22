@@ -8,6 +8,7 @@
 
 import Foundation
 import AVFoundation
+import AssetsLibrary
 
 class CompositionExporter {
     let session: AVAssetExportSession
@@ -56,16 +57,17 @@ class CompositionExporter {
         progressTimer?.invalidate()
        
         if session.status == .completed {
-            completion?(nil)
-        } else {
             completion?(session.outputURL)
-        }
             
-//        let library = ALAssetsLibrary()
-//        library.writeVideoAtPath(jj
-//            toSavedPhotosAlbum: url,
-//            completionBlock: { (url, error) in
-//                print("\(url), \(error)")
-//        })
+            let library = ALAssetsLibrary()
+          
+            if let url = session.outputURL {
+                library.writeVideoAtPath(toSavedPhotosAlbum: url, completionBlock: { (url, error) in
+                    print("\(url), \(error)")
+                })
+            }
+        } else {
+            completion?(nil)
+        }
     }
 }

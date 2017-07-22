@@ -80,7 +80,7 @@ extension AVMutableVideoComposition {
         instructions = clips.flatMap {
             AVMutableVideoCompositionInstruction(
                 clip: $0,
-                size:renderSize,
+                size: renderSize,
                 crop: crop)
         }
     }
