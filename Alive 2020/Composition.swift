@@ -31,21 +31,39 @@ extension Crop {
 class Composition {
     public private(set) var clips = [Clip]()
     public let composition = AVMutableComposition()
+    private let audioTracks: [AVMutableCompositionTrack]
+    private let videoTracks: [AVMutableCompositionTrack]
+    
+    init() {
+        var audioTracks = [AVMutableCompositionTrack]()
+        var videoTracks = [AVMutableCompositionTrack]()
+        
+        for _ in 1...2 {
+            audioTracks.append(
+                composition.addMutableTrack(
+                    withMediaType: AVMediaTypeAudio,
+                    preferredTrackID: kCMPersistentTrackID_Invalid))
+            
+            videoTracks.append(
+                composition.addMutableTrack(
+                    withMediaType: AVMediaTypeVideo,
+                    preferredTrackID: kCMPersistentTrackID_Invalid))
+        }
+        
+        self.audioTracks = audioTracks
+        self.videoTracks = videoTracks
+    }
     
     public func add(asset: AVURLAsset) {
-        let audioTracks = asset.tracks(withMediaType: AVMediaTypeAudio)
-        let videoTracks = asset.tracks(withMediaType: AVMediaTypeVideo)
-        guard let assetAudioTrack = audioTracks.first else { return }
-        guard let assetVideoTrack = videoTracks.first else { return }
-
-        let audioTrack = composition.addMutableTrack(
-            withMediaType: AVMediaTypeAudio,
-            preferredTrackID: kCMPersistentTrackID_Invalid)
+        guard let assetAudioTrack = asset.tracks(
+            withMediaType: AVMediaTypeAudio).first,
+            let assetVideoTrack = asset.tracks(
+                withMediaType: AVMediaTypeVideo).first else {
+                return
+        }
         
-        let videoTrack = composition.addMutableTrack(
-            withMediaType: AVMediaTypeVideo,
-            preferredTrackID: kCMPersistentTrackID_Invalid)
-
+        let audioTrack = self.audioTracks[clips.count % 2]
+        let videoTrack = self.videoTracks[clips.count % 2]
         let srcTimeRange = CMTimeRange(start: kCMTimeZero, duration: asset.duration)
         let duration = composition.duration
         
