@@ -16,6 +16,15 @@ protocol LivePhotoControllerDelegate {
     func selectedIndexPaths(_ indexPaths: [IndexPath]?)
 }
 
+struct CompositionExport {
+    let composition: AVComposition
+    let videoComposition: AVVideoComposition
+}
+
+protocol CompositionExportProvider {
+    func compositionExport() -> CompositionExport?
+}
+
 class LivePhotoController: NSObject {
     fileprivate lazy var delegate: LivePhotoControllerDelegate? = nil
     fileprivate let livePhotoStore = LivePhotoStore()
@@ -55,9 +64,28 @@ class LivePhotoController: NSObject {
             object: nil)
     }
     
-    func composition() -> Composition? {
+    fileprivate func availablePlayer() -> AVPlayer? {
+        return players.flatMap({
+            activePlayers.values.contains($0) ? nil : $0
+        }).first
+    }
+    
+    @objc private func onPlayerReachedEnd(notification: Notification) {
+        guard let item = notification.object as? AVPlayerItem,
+            let player = activePlayers.values.first(
+                where: {$0.currentItem == item}) else {
+                    return
+        }
+        
+        player.seek(to: kCMTimeZero)
+        player.play()
+    }
+}
+
+extension LivePhotoController: CompositionExportProvider {
+    func compositionExport() -> CompositionExport? {
         guard let selectedIndexPaths = viewController.collectionView.indexPathsForSelectedItems else {
-            return nil
+            return  nil
         }
         
         let group = DispatchGroup()
@@ -81,24 +109,12 @@ class LivePhotoController: NSObject {
             composition.add(asset: asset)
         }
         
-        return composition
-    }
-    
-    fileprivate func availablePlayer() -> AVPlayer? {
-        return players.flatMap({
-            activePlayers.values.contains($0) ? nil : $0
-        }).first
-    }
-    
-    @objc private func onPlayerReachedEnd(notification: Notification) {
-        guard let item = notification.object as? AVPlayerItem,
-            let player = activePlayers.values.first(
-                where: {$0.currentItem == item}) else {
-                    return
-        }
-        
-        player.seek(to: kCMTimeZero)
-        player.play()
+        return CompositionExport(
+            composition: composition.composition,
+            videoComposition: AVMutableVideoComposition(
+                clips: composition.clips,
+                size: CGSize(width: 1440.0, height: 1080.0),
+                crop: .portrait))
     }
 }
 
@@ -144,30 +160,6 @@ extension LivePhotoController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        livePhotoStore.cancelThumbnail(at: indexPath.item)
-        livePhotoStore.cancelVideo(at: indexPath.item)
-        activePlayers.removeValue(forKey: indexPath)
-        
-//    func stop() {
-//        player?.pause()
-//        
-//        if let item = player?.currentItem {
-//            print("pause: \(item.asset)")
-//        } else {
-//            print("pause()")
-//        }
-//        
-//        player?.replaceCurrentItem(with: nil)
-//        player = nil
-//        
-//        UIView.animate(
-//            withDuration: 0.2,
-//            delay: 0.0,
-//            options: UIViewAnimationOptions(rawValue: 0),
-//            animations: {
-//                self.imageView.alpha = 1.0
-//            }, completion: nil)
-//    }
-//
+        livePhotoStore.cancelLivePhoto(at: indexPath.item)
     }
 }

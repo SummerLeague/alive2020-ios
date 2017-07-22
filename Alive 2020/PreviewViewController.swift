@@ -20,11 +20,22 @@ class PreviewViewController: UIViewController {
         return button
     }()
     
+    public private(set) lazy var progressView: UIProgressView = {
+        let view = UIProgressView(progressViewStyle: .default)
+        view.progress = 0.0
+        return view
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .white
+        view.addSubview(progressView)
         view.addSubview(button)
+        
+        progressView.snp.makeConstraints { make in
+            make.top.bottom.leading.trailing.equalTo(view)
+        }
         
         button.snp.makeConstraints { make in
             make.centerY.equalTo(view)

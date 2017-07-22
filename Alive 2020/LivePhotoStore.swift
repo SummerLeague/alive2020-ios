@@ -14,6 +14,7 @@ class LivePhotoStore: NSObject {
     private let cachingImageManager = PHCachingImageManager()
     private let resourceManager = PHAssetResourceManager.default()
     private let queue = DispatchQueue(label: "LivePhotoStore.queue")
+    private var livePhotoRequests = [Int: PHImageRequestID]()
     private var thumbnailRequests = [Int: PHImageRequestID]()
     private var videoRequests = [Int: PHAssetResourceDataRequestID]()
     public let assets = PHAsset.livePhotoAssets()
@@ -42,7 +43,7 @@ class LivePhotoStore: NSObject {
                 if let isDegraded = info?[PHImageResultIsDegradedKey] as? Bool,
                     !isDegraded {
                     self.queue.async {
-                        self.thumbnailRequests.removeValue(forKey: index)
+                        self.livePhotoRequests.removeValue(forKey: index)
                     }
                 }
                 
@@ -50,7 +51,15 @@ class LivePhotoStore: NSObject {
         }
         
         queue.async {
-            self.thumbnailRequests[index] = requestId
+            self.livePhotoRequests[index] = requestId
+        }
+    }
+    
+    public func cancelLivePhoto(at index: Int) {
+        guard let requestId = livePhotoRequests[index] else { return }
+        queue.async {
+            self.cachingImageManager.cancelImageRequest(requestId)
+            self.livePhotoRequests.removeValue(forKey: index)
         }
     }
     

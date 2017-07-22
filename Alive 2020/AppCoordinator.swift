@@ -19,7 +19,8 @@ class AppCoordinator: NSObject {
     }()
     
     fileprivate lazy var previewController: PreviewController = {
-        return PreviewController(delegate: self)
+        return PreviewController(
+            compositionExportProvider: self.livePhotoController)
     }()
     
     fileprivate lazy var viewController: MainViewController = {
@@ -49,39 +50,6 @@ extension AppCoordinator: LivePhotoControllerDelegate {
             viewController.showOverlay()
         } else {
             viewController.hideOverlay()
-        }
-    }
-}
-
-extension AppCoordinator: PreviewControllerDelegate {
-    func submitted() {
-        guard let composition = livePhotoController.composition(),
-            let exporter = AVAssetExportSession(
-                asset: composition.composition,
-                presetName: AVAssetExportPresetHighestQuality) else {
-                    return
-        }
-       
-        let videoComposition = AVMutableVideoComposition(
-            clips: composition.clips,
-            size: CGSize(width: 1440.0, height: 1080.0),
-            crop: .portrait)
-        let url = temporaryUrl(extension: "mp4")
-        
-        exporter.outputFileType = AVFileTypeMPEG4
-        exporter.outputURL = url
-        exporter.videoComposition = videoComposition
-        exporter.exportAsynchronously {
-            print("done \(exporter.status) \(exporter.error)")
-            guard exporter.status == .completed else { return }
-            print("done: \(url)")
-            
-            let library = ALAssetsLibrary()
-            library.writeVideoAtPath(
-                toSavedPhotosAlbum: url,
-                completionBlock: { (url, error) in
-                    print("\(url), \(error)")
-            })
         }
     }
 }
