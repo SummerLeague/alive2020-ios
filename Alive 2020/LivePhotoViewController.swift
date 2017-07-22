@@ -10,7 +10,7 @@ import UIKit
 
 protocol LivePhotoViewControllerDelegate {
     func count(section: Int) -> Int
-    func configure(cell: VideoCell, indexPath: IndexPath)
+    func configure(cell: LivePhotoCell, indexPath: IndexPath)
 }
 
 class LivePhotoViewController: UIViewController, UICollectionViewDataSource {
@@ -29,7 +29,7 @@ class LivePhotoViewController: UIViewController, UICollectionViewDataSource {
         collectionView.backgroundColor = UIColor.clear
         collectionView.allowsMultipleSelection = true
         collectionView.register(
-            VideoCell.self,
+            LivePhotoCell.self,
             forCellWithReuseIdentifier: "cell")
         return collectionView
     }()
@@ -68,7 +68,7 @@ class LivePhotoViewController: UIViewController, UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: "cell",
             for: indexPath)
-        if let cell = cell as? VideoCell {
+        if let cell = cell as? LivePhotoCell {
             delegate?.configure(cell: cell, indexPath: indexPath)
         }
         return cell

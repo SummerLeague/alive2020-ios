@@ -13,8 +13,7 @@ class LivePhotoStore: NSObject {
     private let imageManager = PHImageManager.default()
     private let cachingImageManager = PHCachingImageManager()
     private let resourceManager = PHAssetResourceManager.default()
-    private let thumbnailQueue = DispatchQueue(label: "thumbnailQueue")
-    private let videoQueue = DispatchQueue(label: "videoQueue")
+    private let queue = DispatchQueue(label: "LivePhotoStore.queue")
     private var thumbnailRequests = [Int: PHImageRequestID]()
     private var videoRequests = [Int: PHAssetResourceDataRequestID]()
     public let assets = PHAsset.livePhotoAssets()
@@ -26,6 +25,33 @@ class LivePhotoStore: NSObject {
             targetSize: CGSize(width: 512, height: 512),
             contentMode: .aspectFit,
             options: nil)
+    }
+    
+    public func livePhoto(at index: Int, completion: @escaping (PHLivePhoto?) -> ()) {
+        let asset = assets[index]
+        let size = CGSize(width: 512, height: 512)
+        let options = PHLivePhotoRequestOptions()
+        options.deliveryMode = .opportunistic
+        options.isNetworkAccessAllowed = true
+        
+        let requestId = cachingImageManager.requestLivePhoto(
+            for: asset,
+            targetSize: size,
+            contentMode: .aspectFill,
+            options: options) { (livePhoto, info) in
+                if let isDegraded = info?[PHImageResultIsDegradedKey] as? Bool,
+                    !isDegraded {
+                    self.queue.async {
+                        self.thumbnailRequests.removeValue(forKey: index)
+                    }
+                }
+                
+                completion(livePhoto)
+        }
+        
+        queue.async {
+            self.thumbnailRequests[index] = requestId
+        }
     }
     
     public func thumbnail(at index: Int, completion: @escaping (UIImage?) -> ()) {
@@ -44,7 +70,7 @@ class LivePhotoStore: NSObject {
             options: options) { (image, info) in
                 if let isDegraded = info?[PHImageResultIsDegradedKey] as? Bool,
                     !isDegraded {
-                    self.thumbnailQueue.async {
+                    self.queue.async {
                         self.thumbnailRequests.removeValue(forKey: index)
                     }
                 }
@@ -52,14 +78,14 @@ class LivePhotoStore: NSObject {
                 completion(image)
         }
         
-        thumbnailQueue.async {
+        queue.async {
             self.thumbnailRequests[index] = requestId
         }
     }
     
     public func cancelThumbnail(at index: Int) {
         guard let requestId = thumbnailRequests[index] else { return }
-        thumbnailQueue.async {
+        queue.async {
             self.cachingImageManager.cancelImageRequest(requestId)
             self.thumbnailRequests.removeValue(forKey: index)
         }
@@ -89,19 +115,19 @@ class LivePhotoStore: NSObject {
                 completion(movie)
             }
             
-            self.videoQueue.async {
+            self.queue.async {
                 self.videoRequests.removeValue(forKey: index)
             }
         }
         
-        videoQueue.async {
+        queue.async {
             self.videoRequests[index] = requestId
         }
     }
     
     public func cancelVideo(at index: Int) {
         guard let requestId = videoRequests[index] else { return }
-        videoQueue.async {
+        queue.async {
             self.resourceManager.cancelDataRequest(requestId)
             self.videoRequests.removeValue(forKey: index)
         }

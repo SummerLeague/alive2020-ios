@@ -107,7 +107,7 @@ extension LivePhotoController: LivePhotoViewControllerDelegate {
         return livePhotoStore.assets.count
     }
     
-    func configure(cell: VideoCell, indexPath: IndexPath) {
+    func configure(cell: LivePhotoCell, indexPath: IndexPath) {
         /**/
     }
 }
@@ -132,52 +132,14 @@ extension LivePhotoController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard let cell = cell as? VideoCell else { return }
+        guard let cell = cell as? LivePhotoCell else { return }
         
-        livePhotoStore.thumbnail(at: indexPath.item) { image in
+        livePhotoStore.livePhoto(at: indexPath.item) { livePhoto in
             guard collectionView.cellForItem(at: indexPath) == cell else {
                 return
             }
-            cell.imageView.image = image
-        }
-        
-        livePhotoStore.video(at: indexPath.item) { asset in
-            guard let asset = asset,
-                collectionView.cellForItem(at: indexPath) == cell else {
-                return
-            }
-            
-            asset.loadValuesAsynchronously(
-                forKeys: ["playable"],
-                completionHandler: {
-                    guard asset.isPlayable else { return }
-                    let item = AVPlayerItem(asset: asset)
-                    
-                    DispatchQueue.main.async {
-                        guard let player = self.availablePlayer(),
-                            collectionView.cellForItem(
-                                at: indexPath) == cell else {
-                                    return
-                        }
-                        
-                        self.activePlayers[indexPath] = player
-                        
-                        cell.playerView.player = player
-                        
-                        let start = CFAbsoluteTimeGetCurrent()
-                        player.replaceCurrentItem(with: item)
-                        print(CFAbsoluteTimeGetCurrent() - start)
-                        player.play()
-                        
-                        UIView.animate(
-                            withDuration: 0.2,
-                            delay: 0.4,
-                            options: UIViewAnimationOptions(rawValue: 0),
-                            animations: {
-                                cell.imageView.alpha = 0.0
-                            }, completion: nil)
-                    }
-            })
+            cell.imageView.livePhoto = livePhoto
+            cell.imageView.startPlayback(with: .hint)
         }
     }
     
