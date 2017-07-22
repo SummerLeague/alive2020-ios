@@ -30,6 +30,7 @@ class LivePhotoController: NSObject {
     fileprivate let livePhotoStore = LivePhotoStore()
     fileprivate let players: [AVPlayer]
     fileprivate var activePlayers = [IndexPath: AVPlayer]()
+    fileprivate var selectedIndexPaths = [IndexPath]()
     
     public lazy var viewController: LivePhotoViewController = {
         let viewController = LivePhotoViewController()
@@ -84,10 +85,6 @@ class LivePhotoController: NSObject {
 
 extension LivePhotoController: CompositionExportProvider {
     func compositionExport() -> CompositionExport? {
-        guard let selectedIndexPaths = viewController.collectionView.indexPathsForSelectedItems else {
-            return  nil
-        }
-        
         let group = DispatchGroup()
         var assets = [IndexPath: AVURLAsset]()
         
@@ -138,13 +135,17 @@ extension LivePhotoController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("select \(indexPath)")
-        delegate?.selectedIndexPaths(collectionView.indexPathsForSelectedItems)
+        if selectedIndexPaths.index(of: indexPath) == nil {
+            selectedIndexPaths.append(indexPath)
+        }
+        delegate?.selectedIndexPaths(selectedIndexPaths)
     }
 
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        print("deselect \(indexPath)")
-        delegate?.selectedIndexPaths(collectionView.indexPathsForSelectedItems)
+        if let index = selectedIndexPaths.index(of: indexPath) {
+            selectedIndexPaths.remove(at: index)
+        }
+        delegate?.selectedIndexPaths(selectedIndexPaths)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
