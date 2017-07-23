@@ -25,4 +25,13 @@ struct User {
         self.email = email
         self.authToken = authToken
     }
+    
+    func toJson() -> JsonDictionary {
+        return [
+            "id": id,
+            "username": username,
+            "email": email,
+            "authToken": authToken
+        ]
+    }
 }

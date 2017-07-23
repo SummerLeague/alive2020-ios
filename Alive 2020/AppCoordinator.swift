@@ -41,8 +41,15 @@ class AppCoordinator: NSObject {
     
     public func start() {
         navigationController.isNavigationBarHidden = true
-        navigationController.setViewControllers(
-            [loginViewController], animated: false)
+        
+        if let user = Defaults.sharedInstance.user {
+            service.authorization = user.authToken
+            self.navigationController.setViewControllers(
+                [self.viewController], animated: true)
+        } else {
+            navigationController.setViewControllers(
+                [loginViewController], animated: false)
+        }
     }
     
     private func login(username: String, password: String) {
@@ -62,6 +69,7 @@ class AppCoordinator: NSObject {
     
     private func authenticate(user: User) {
         DispatchQueue.main.async {
+            Defaults.sharedInstance.user = user
             self.service.authorization = user.authToken
             self.navigationController.setViewControllers(
                 [self.viewController], animated: true)
