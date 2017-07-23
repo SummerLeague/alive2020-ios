@@ -11,9 +11,16 @@ import UIKit
 class AppCoordinator: NSObject {
     private let navigationController: UINavigationController
     private let service = Service()
+    private var isLoggingIn = false
     
     fileprivate lazy var livePhotoController: LivePhotoController = {
         return LivePhotoController(delegate: self)
+    }()
+    
+    fileprivate lazy var loginViewController: LoginViewController = {
+        let viewController = LoginViewController()
+        viewController.login = self.login
+        return viewController
     }()
     
     fileprivate lazy var previewController: PreviewController = {
@@ -33,20 +40,31 @@ class AppCoordinator: NSObject {
     }
     
     public func start() {
-        login()
         navigationController.isNavigationBarHidden = true
-        navigationController.setViewControllers([viewController], animated: false)
+        navigationController.setViewControllers(
+            [loginViewController], animated: false)
     }
     
-    private func login() {
+    private func login(username: String, password: String) {
+        guard !isLoggingIn else { return }
+        isLoggingIn = true
         service.login(
-            username: kUsername,
-            password: kPassword) { [weak self] user in
-            if let user = user {
-                self?.service.authorization = user.authToken
-            } else {
-                print("Couldn't login.")
-            }
+            username: username,
+            password: password) { [weak self] user in
+                self?.isLoggingIn = false
+                if let user = user {
+                    self?.authenticate(user: user)
+                } else {
+                    print("Couldn't login.")
+                }
+        }
+    }
+    
+    private func authenticate(user: User) {
+        DispatchQueue.main.async {
+            self.service.authorization = user.authToken
+            self.navigationController.setViewControllers(
+                [self.viewController], animated: true)
         }
     }
 }
