@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Photos
 
 class AppCoordinator: NSObject {
     private let navigationController: UINavigationController
@@ -44,11 +45,23 @@ class AppCoordinator: NSObject {
         
         if let user = Defaults.sharedInstance.user {
             service.authorization = user.authToken
-            self.navigationController.setViewControllers(
-                [self.viewController], animated: true)
+            showLivePhotos()
         } else {
             navigationController.setViewControllers(
                 [loginViewController], animated: false)
+        }
+    }
+    
+    public func showLivePhotos() {
+        if PHPhotoLibrary.authorizationStatus() == .notDetermined {
+            PHPhotoLibrary.requestAuthorization({ status in
+                DispatchQueue.main.async {
+                    self.showLivePhotos()
+                }
+            })
+        } else {
+            self.navigationController.setViewControllers(
+                [self.viewController], animated: true)
         }
     }
     
@@ -71,8 +84,7 @@ class AppCoordinator: NSObject {
         DispatchQueue.main.async {
             Defaults.sharedInstance.user = user
             self.service.authorization = user.authToken
-            self.navigationController.setViewControllers(
-                [self.viewController], animated: true)
+            self.showLivePhotos()
         }
     }
 }
