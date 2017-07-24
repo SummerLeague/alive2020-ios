@@ -11,6 +11,7 @@ import Photos
 import AVFoundation
 
 let kMaxAVPlayers = 3
+let kItemsPerRow: CGFloat = 1
 
 protocol LivePhotoControllerDelegate {
     func selectedIndexPaths(_ indexPaths: [IndexPath]?)
@@ -127,7 +128,7 @@ extension LivePhotoController: LivePhotoViewControllerDelegate {
 
 extension LivePhotoController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let items: CGFloat = 1
+        let items = kItemsPerRow
         let margins: CGFloat = max(0, items - 1)
         let width = (collectionView.bounds.width - margins) / items
         
