@@ -10,20 +10,22 @@ import UIKit
 import PhotosUI
 
 class LivePhotoCell: UICollectionViewCell {
+    public var playbackEnded: ((PHLivePhotoView) -> ())? = nil
     
-    public lazy var imageView: PHLivePhotoView = {
-        let imageView = PHLivePhotoView()
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        return imageView
+    public lazy var livePhotoView: PHLivePhotoView = {
+        let view = PHLivePhotoView()
+        view.delegate = self
+        view.contentMode = .scaleAspectFill
+        view.clipsToBounds = true
+        return view
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        addSubview(imageView)
+        addSubview(livePhotoView)
         
-        imageView.snp.makeConstraints { make in
+        livePhotoView.snp.makeConstraints { make in
             make.top.bottom.leading.trailing.equalTo(self)
         }
     }
@@ -34,7 +36,13 @@ class LivePhotoCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        imageView.stopPlayback()
-        imageView.livePhoto = nil
+        livePhotoView.stopPlayback()
+        livePhotoView.livePhoto = nil
+    }
+}
+
+extension LivePhotoCell: PHLivePhotoViewDelegate {
+    func livePhotoView(_ livePhotoView: PHLivePhotoView, didEndPlaybackWith playbackStyle: PHLivePhotoViewPlaybackStyle) {
+        playbackEnded?(livePhotoView)
     }
 }

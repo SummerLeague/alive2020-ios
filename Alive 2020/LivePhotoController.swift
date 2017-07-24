@@ -155,8 +155,16 @@ extension LivePhotoController: UICollectionViewDelegateFlowLayout {
             guard collectionView.cellForItem(at: indexPath) == cell else {
                 return
             }
-            cell.imageView.livePhoto = livePhoto
-            cell.imageView.startPlayback(with: .hint)
+            
+            cell.livePhotoView.livePhoto = livePhoto
+            cell.livePhotoView.startPlayback(with: .hint)
+            cell.playbackEnded = { livePhotoView in
+                guard collectionView.cellForItem(at: indexPath) == cell else {
+                    return
+                }
+                
+                livePhotoView.startPlayback(with: .hint)
+            }
         }
     }
     
