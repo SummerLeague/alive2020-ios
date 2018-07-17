@@ -2,8 +2,20 @@
 
 Give it some life
 
-![image](Documentation/Screenshot.png)
+## Getting started
 
-# Setup
+### Prerequisites
 
-Install dependencies from Cocoa Pods: `pod install`
+#### Carthage
+
+```bash
+# via Homebrew
+brew update
+brew install carthage
+```
+
+### Build dependencies
+
+```bash
+carthage bootstrap --platform iOS
+```
